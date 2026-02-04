@@ -1,0 +1,86 @@
+using OpenQA.Selenium;
+using Serilog;
+using System.Collections.Generic;
+
+namespace TakealotAutomation.Pages
+{
+    /// <summary>
+    /// Page object for search results
+    /// </summary>
+    public class SearchResultsPage : Core.BasePage
+    {
+        // Locators
+        private readonly By _productItemsLocator = By.XPath("//div[contains(@class, 'product-item')]");
+        private readonly By _productPriceLocator = By.XPath(".//span[contains(@class, 'price')]");
+        private readonly By _productNameLocator = By.XPath(".//a[contains(@class, 'product-name')]");
+        private readonly By _sortDropdownLocator = By.XPath("//select[contains(@class, 'sort')]");
+        private readonly By _filterButtonLocator = By.XPath("//button[contains(text(), 'Filters')]");
+        private readonly By _searchResultsHeaderLocator = By.XPath("//h1[contains(text(), 'Search Results')]");
+        private readonly By _noResultsMessageLocator = By.XPath("//p[contains(text(), 'No products found')]");
+
+        public SearchResultsPage(IWebDriver driver) : base(driver) { }
+
+        /// <summary>
+        /// Gets list of products displayed
+        /// </summary>
+        public IList<IWebElement> GetProductItems()
+        {
+            var items = Driver.FindElements(_productItemsLocator);
+            Log.Information($"Found {items.Count} products");
+            return items;
+        }
+
+        /// <summary>
+        /// Gets product count
+        /// </summary>
+        public int GetProductCount()
+        {
+            int count = GetProductItems().Count;
+            Log.Information($"Product count: {count}");
+            return count;
+        }
+
+        /// <summary>
+        /// Clicks on first product
+        /// </summary>
+        public ProductDetailsPage ClickFirstProduct()
+        {
+            Log.Information("Clicking first product");
+            var products = GetProductItems();
+            if (products.Count > 0)
+            {
+                products[0].Click();
+                return new ProductDetailsPage(Driver);
+            }
+            throw new NoSuchElementException("No products found");
+        }
+
+        /// <summary>
+        /// Filters results by price range
+        /// </summary>
+        public void FilterByPrice(decimal minPrice, decimal maxPrice)
+        {
+            Log.Information($"Filtering by price: {minPrice} - {maxPrice}");
+            WaitAndClick(_filterButtonLocator);
+            // Add specific price filter logic here based on actual website structure
+        }
+
+        /// <summary>
+        /// Verifies search results are displayed
+        /// </summary>
+        public bool AreSearchResultsDisplayed()
+        {
+            bool resultsVisible = IsElementPresent(_productItemsLocator);
+            Log.Information($"Search results displayed: {resultsVisible}");
+            return resultsVisible;
+        }
+
+        /// <summary>
+        /// Checks if no results message is shown
+        /// </summary>
+        public bool IsNoResultsMessageDisplayed()
+        {
+            return IsElementPresent(_noResultsMessageLocator);
+        }
+    }
+}

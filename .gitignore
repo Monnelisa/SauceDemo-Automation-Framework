@@ -1,0 +1,46 @@
+# This file tells Git which files to ignore in the repository
+
+# Build results
+bin/
+obj/
+.vs/
+.vscode/
+
+# NUnit results
+TestResults/
+*.trx
+*.coverage
+
+# User-specific settings
+*.user
+*.suo
+.idea/
+
+# Rider settings
+.idea/
+*.sln.iml
+
+# Output directories
+Logs/
+Screenshots/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+~*
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+
+# IDEs
+.vscode/
+.idea/
+
+# Test execution
+TestExecution*/
