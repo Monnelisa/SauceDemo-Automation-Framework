@@ -1,0 +1,1320 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  TakealotAutomation -> C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\bin\Debug\net10.0\TakealotAutomation.dll
+Test run for C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\bin\Debug\net10.0\TakealotAutomation.dll (.NETCoreApp,Version=v10.0)
+VSTest version 18.0.1 (x64)
+
+Starting test execution, please wait...
+A total of 1 test files matched the specified pattern.
+[14:26:48 INF] Test Started: FillSignUpForm
+[14:26:53 INF] WebDriver initialized successfully
+[14:26:53 INF] Test Started: FillSignUpForm
+[14:26:59 INF] WebDriver initialized successfully
+[14:26:59 INF] Navigating to account
+[14:27:03 INF] Clicked element: By.XPath: //button[contains(@class, 'account')]
+[14:27:03 INF] Navigating to sign up
+[14:27:24 ERR] Error clicking element: By.XPath: //a[contains(text(), 'Sign Up')] - Timed out after 15 seconds
+[14:27:24 INF] Screenshot saved: Screenshots\FillSignUpForm_2026-02-05_14-27-24.png
+[14:27:24 ERR] Test Failed: FillSignUpForm
+[14:27:25 INF] WebDriver quit successfully
+
+  Failed FillSignUpForm [36 s]
+  Error Message:
+   OpenQA.Selenium.WebDriverTimeoutException : Timed out after 15 seconds
+  Stack Trace:
+     at OpenQA.Selenium.Support.UI.DefaultWait`1.ThrowTimeoutException(String exceptionMessage, Exception lastException)
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.Until[TResult](Func`2 condition, CancellationToken token)
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.Until[TResult](Func`2 condition)
+   at TakealotAutomation.Core.BasePage.WaitAndClick(By locator) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\BasePage.cs:line 65
+   at TakealotAutomation.Pages.AccountPage.GoToSignUp() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Pages\AccountPage.cs:line 38
+   at TakealotAutomation.Tests.AuthenticationTests.FillSignUpForm() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\AuthenticationTests.cs:line 101
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+
+  Standard Output Messages:
+ [14:26:48 INF] Test Started: FillSignUpForm
+ [14:26:53 INF] WebDriver initialized successfully
+ [14:26:53 INF] Test Started: FillSignUpForm
+ [14:26:59 INF] WebDriver initialized successfully
+ [14:26:59 INF] Navigating to account
+ [14:27:03 INF] Clicked element: By.XPath: //button[contains(@class, 'account')]
+ [14:27:03 INF] Navigating to sign up
+ [14:27:24 ERR] Error clicking element: By.XPath: //a[contains(text(), 'Sign Up')] - Timed out after 15 seconds
+ [14:27:24 INF] Screenshot saved: Screenshots\FillSignUpForm_2026-02-05_14-27-24.png
+ [14:27:24 ERR] Test Failed: FillSignUpForm
+ [14:27:25 INF] WebDriver quit successfully
+
+
+[14:27:25 INF] Test Started: LoginWithInvalidCredentials
+[14:27:28 INF] WebDriver initialized successfully
+[14:27:28 INF] Test Started: LoginWithInvalidCredentials
+[14:27:32 INF] WebDriver initialized successfully
+[14:27:32 INF] Navigating to account
+[14:27:36 INF] Clicked element: By.XPath: //button[contains(@class, 'account')]
+[14:27:36 INF] Navigating to login
+[14:27:37 INF] Clicked element: By.XPath: //a[contains(text(), 'Login')]
+[14:27:37 INF] Logging in
+[14:27:58 ERR] Timeout waiting for element: By.XPath: //input[@type='email']
+[14:27:58 ERR] Error sending keys to element: By.XPath: //input[@type='email'] - Element not found within timeout: By.XPath: //input[@type='email']
+[14:27:58 INF] Screenshot saved: Screenshots\LoginWithInvalidCredentials_2026-02-05_14-27-58.png
+[14:27:58 ERR] Test Failed: LoginWithInvalidCredentials
+[14:27:58 INF] WebDriver quit successfully
+
+  Failed LoginWithInvalidCredentials [33 s]
+  Error Message:
+   System.TimeoutException : Element not found within timeout: By.XPath: //input[@type='email']
+  ----> OpenQA.Selenium.WebDriverTimeoutException : Timed out after 15 seconds
+  Stack Trace:
+     at TakealotAutomation.Core.BasePage.WaitForElementToBeVisible(By locator) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\BasePage.cs:line 54
+   at TakealotAutomation.Core.BasePage.WaitAndSendKeys(By locator, String text) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\BasePage.cs:line 100
+   at TakealotAutomation.Pages.LoginPage.Login(String email, String password) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Pages\LoginPage.cs:line 27
+   at TakealotAutomation.Tests.AuthenticationTests.LoginWithInvalidCredentials() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\AuthenticationTests.cs:line 70
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+--WebDriverTimeoutException
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.ThrowTimeoutException(String exceptionMessage, Exception lastException)
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.Until[TResult](Func`2 condition, CancellationToken token)
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.Until[TResult](Func`2 condition)
+   at TakealotAutomation.Core.BasePage.WaitForElementToBeVisible(By locator) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\BasePage.cs:line 30
+
+  Standard Output Messages:
+ [14:27:25 INF] Test Started: LoginWithInvalidCredentials
+ [14:27:28 INF] WebDriver initialized successfully
+ [14:27:28 INF] Test Started: LoginWithInvalidCredentials
+ [14:27:32 INF] WebDriver initialized successfully
+ [14:27:32 INF] Navigating to account
+ [14:27:36 INF] Clicked element: By.XPath: //button[contains(@class, 'account')]
+ [14:27:36 INF] Navigating to login
+ [14:27:37 INF] Clicked element: By.XPath: //a[contains(text(), 'Login')]
+ [14:27:37 INF] Logging in
+ [14:27:58 ERR] Timeout waiting for element: By.XPath: //input[@type='email']
+ [14:27:58 ERR] Error sending keys to element: By.XPath: //input[@type='email'] - Element not found within timeout: By.XPath: //input[@type='email']
+ [14:27:58 INF] Screenshot saved: Screenshots\LoginWithInvalidCredentials_2026-02-05_14-27-58.png
+ [14:27:58 ERR] Test Failed: LoginWithInvalidCredentials
+ [14:27:58 INF] WebDriver quit successfully
+
+
+[14:27:58 INF] Test Started: LoginWithValidCredentials
+[14:28:04 INF] WebDriver initialized successfully
+[14:28:04 INF] Test Started: LoginWithValidCredentials
+[14:28:21 INF] WebDriver initialized successfully
+[14:28:21 INF] Navigating to account
+[14:28:21 INF] Clicked element: By.XPath: //button[contains(@class, 'account')]
+[14:28:21 INF] Navigating to login
+[14:28:22 INF] Clicked element: By.XPath: //a[contains(text(), 'Login')]
+[14:28:22 INF] Logging in
+[14:28:43 ERR] Timeout waiting for element: By.XPath: //input[@type='email']
+[14:28:43 ERR] Error sending keys to element: By.XPath: //input[@type='email'] - Element not found within timeout: By.XPath: //input[@type='email']
+[14:28:43 INF] Screenshot saved: Screenshots\LoginWithValidCredentials_2026-02-05_14-28-43.png
+[14:28:43 ERR] Test Failed: LoginWithValidCredentials
+[14:28:44 INF] WebDriver quit successfully
+
+  Failed LoginWithValidCredentials [45 s]
+  Error Message:
+   System.TimeoutException : Element not found within timeout: By.XPath: //input[@type='email']
+  ----> OpenQA.Selenium.WebDriverTimeoutException : Timed out after 15 seconds
+  Stack Trace:
+     at TakealotAutomation.Core.BasePage.WaitForElementToBeVisible(By locator) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\BasePage.cs:line 54
+   at TakealotAutomation.Core.BasePage.WaitAndSendKeys(By locator, String text) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\BasePage.cs:line 100
+   at TakealotAutomation.Pages.LoginPage.Login(String email, String password) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Pages\LoginPage.cs:line 27
+   at TakealotAutomation.Tests.AuthenticationTests.LoginWithValidCredentials() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\AuthenticationTests.cs:line 53
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+--WebDriverTimeoutException
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.ThrowTimeoutException(String exceptionMessage, Exception lastException)
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.Until[TResult](Func`2 condition, CancellationToken token)
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.Until[TResult](Func`2 condition)
+   at TakealotAutomation.Core.BasePage.WaitForElementToBeVisible(By locator) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\BasePage.cs:line 30
+
+  Standard Output Messages:
+ [14:27:58 INF] Test Started: LoginWithValidCredentials
+ [14:28:04 INF] WebDriver initialized successfully
+ [14:28:04 INF] Test Started: LoginWithValidCredentials
+ [14:28:21 INF] WebDriver initialized successfully
+ [14:28:21 INF] Navigating to account
+ [14:28:21 INF] Clicked element: By.XPath: //button[contains(@class, 'account')]
+ [14:28:21 INF] Navigating to login
+ [14:28:22 INF] Clicked element: By.XPath: //a[contains(text(), 'Login')]
+ [14:28:22 INF] Logging in
+ [14:28:43 ERR] Timeout waiting for element: By.XPath: //input[@type='email']
+ [14:28:43 ERR] Error sending keys to element: By.XPath: //input[@type='email'] - Element not found within timeout: By.XPath: //input[@type='email']
+ [14:28:43 INF] Screenshot saved: Screenshots\LoginWithValidCredentials_2026-02-05_14-28-43.png
+ [14:28:43 ERR] Test Failed: LoginWithValidCredentials
+ [14:28:44 INF] WebDriver quit successfully
+
+
+[14:28:44 INF] Test Started: LogoutUser
+[14:28:48 INF] WebDriver initialized successfully
+[14:28:48 INF] Test Started: LogoutUser
+[14:28:53 INF] WebDriver initialized successfully
+[14:28:53 INF] Navigating to account
+[14:28:58 INF] Clicked element: By.XPath: //button[contains(@class, 'account')]
+[14:28:58 INF] Navigating to login
+[14:29:00 INF] Clicked element: By.XPath: //a[contains(text(), 'Login')]
+[14:29:00 INF] Logging in
+[14:29:20 ERR] Timeout waiting for element: By.XPath: //input[@type='email']
+[14:29:20 ERR] Error sending keys to element: By.XPath: //input[@type='email'] - Element not found within timeout: By.XPath: //input[@type='email']
+[14:29:21 INF] Screenshot saved: Screenshots\LogoutUser_2026-02-05_14-29-20.png
+[14:29:21 ERR] Test Failed: LogoutUser
+[14:29:21 INF] WebDriver quit successfully
+
+  Failed LogoutUser [37 s]
+  Error Message:
+   System.TimeoutException : Element not found within timeout: By.XPath: //input[@type='email']
+  ----> OpenQA.Selenium.WebDriverTimeoutException : Timed out after 15 seconds
+  Stack Trace:
+     at TakealotAutomation.Core.BasePage.WaitForElementToBeVisible(By locator) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\BasePage.cs:line 54
+   at TakealotAutomation.Core.BasePage.WaitAndSendKeys(By locator, String text) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\BasePage.cs:line 100
+   at TakealotAutomation.Pages.LoginPage.Login(String email, String password) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Pages\LoginPage.cs:line 27
+   at TakealotAutomation.Tests.AuthenticationTests.LogoutUser() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\AuthenticationTests.cs:line 125
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+--WebDriverTimeoutException
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.ThrowTimeoutException(String exceptionMessage, Exception lastException)
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.Until[TResult](Func`2 condition, CancellationToken token)
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.Until[TResult](Func`2 condition)
+   at TakealotAutomation.Core.BasePage.WaitForElementToBeVisible(By locator) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\BasePage.cs:line 30
+
+  Standard Output Messages:
+ [14:28:44 INF] Test Started: LogoutUser
+ [14:28:48 INF] WebDriver initialized successfully
+ [14:28:48 INF] Test Started: LogoutUser
+ [14:28:53 INF] WebDriver initialized successfully
+ [14:28:53 INF] Navigating to account
+ [14:28:58 INF] Clicked element: By.XPath: //button[contains(@class, 'account')]
+ [14:28:58 INF] Navigating to login
+ [14:29:00 INF] Clicked element: By.XPath: //a[contains(text(), 'Login')]
+ [14:29:00 INF] Logging in
+ [14:29:20 ERR] Timeout waiting for element: By.XPath: //input[@type='email']
+ [14:29:20 ERR] Error sending keys to element: By.XPath: //input[@type='email'] - Element not found within timeout: By.XPath: //input[@type='email']
+ [14:29:21 INF] Screenshot saved: Screenshots\LogoutUser_2026-02-05_14-29-20.png
+ [14:29:21 ERR] Test Failed: LogoutUser
+ [14:29:21 INF] WebDriver quit successfully
+
+
+[14:29:21 INF] Test Started: VerifyLoginPageLoads
+[14:29:25 INF] WebDriver initialized successfully
+[14:29:25 INF] Test Started: VerifyLoginPageLoads
+[14:29:32 INF] WebDriver initialized successfully
+[14:29:32 INF] Navigating to account
+[14:29:36 INF] Clicked element: By.XPath: //button[contains(@class, 'account')]
+[14:29:36 INF] Navigating to login
+[14:29:37 INF] Clicked element: By.XPath: //a[contains(text(), 'Login')]
+[14:29:47 INF] Login page loaded: False
+[14:29:47 INF] Screenshot saved: Screenshots\VerifyLoginPageLoads_2026-02-05_14-29-47.png
+[14:29:47 ERR] Test Failed: VerifyLoginPageLoads
+[14:29:48 INF] WebDriver quit successfully
+
+  Failed VerifyLoginPageLoads [26 s]
+  Error Message:
+     Login page should load
+Assert.That(loginPage.IsLoginPageLoaded(), Is.True)
+  Expected: True
+  But was:  False
+
+  Stack Trace:
+     at TakealotAutomation.Tests.AuthenticationTests.VerifyLoginPageLoads() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\AuthenticationTests.cs:line 39
+
+1)    at TakealotAutomation.Tests.AuthenticationTests.VerifyLoginPageLoads() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\AuthenticationTests.cs:line 39
+
+
+  Standard Output Messages:
+ [14:29:21 INF] Test Started: VerifyLoginPageLoads
+ [14:29:25 INF] WebDriver initialized successfully
+ [14:29:25 INF] Test Started: VerifyLoginPageLoads
+ [14:29:32 INF] WebDriver initialized successfully
+ [14:29:32 INF] Navigating to account
+ [14:29:36 INF] Clicked element: By.XPath: //button[contains(@class, 'account')]
+ [14:29:36 INF] Navigating to login
+ [14:29:37 INF] Clicked element: By.XPath: //a[contains(text(), 'Login')]
+ [14:29:47 INF] Login page loaded: False
+ [14:29:47 INF] Screenshot saved: Screenshots\VerifyLoginPageLoads_2026-02-05_14-29-47.png
+ [14:29:47 ERR] Test Failed: VerifyLoginPageLoads
+ [14:29:48 INF] WebDriver quit successfully
+
+
+[14:29:48 INF] Test Started: VerifySignUpPageLoads
+[14:29:53 INF] WebDriver initialized successfully
+[14:29:53 INF] Test Started: VerifySignUpPageLoads
+[14:30:01 INF] WebDriver initialized successfully
+[14:30:01 INF] Navigating to account
+[14:30:07 INF] Clicked element: By.XPath: //button[contains(@class, 'account')]
+[14:30:07 INF] Navigating to sign up
+[14:30:27 ERR] Error clicking element: By.XPath: //a[contains(text(), 'Sign Up')] - Timed out after 15 seconds
+[14:30:27 INF] Screenshot saved: Screenshots\VerifySignUpPageLoads_2026-02-05_14-30-27.png
+[14:30:27 ERR] Test Failed: VerifySignUpPageLoads
+[14:30:28 INF] WebDriver quit successfully
+
+  Failed VerifySignUpPageLoads [40 s]
+  Error Message:
+   OpenQA.Selenium.WebDriverTimeoutException : Timed out after 15 seconds
+  Stack Trace:
+     at OpenQA.Selenium.Support.UI.DefaultWait`1.ThrowTimeoutException(String exceptionMessage, Exception lastException)
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.Until[TResult](Func`2 condition, CancellationToken token)
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.Until[TResult](Func`2 condition)
+   at TakealotAutomation.Core.BasePage.WaitAndClick(By locator) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\BasePage.cs:line 65
+   at TakealotAutomation.Pages.AccountPage.GoToSignUp() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Pages\AccountPage.cs:line 38
+   at TakealotAutomation.Tests.AuthenticationTests.VerifySignUpPageLoads() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\AuthenticationTests.cs:line 87
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+
+  Standard Output Messages:
+ [14:29:48 INF] Test Started: VerifySignUpPageLoads
+ [14:29:53 INF] WebDriver initialized successfully
+ [14:29:53 INF] Test Started: VerifySignUpPageLoads
+ [14:30:01 INF] WebDriver initialized successfully
+ [14:30:01 INF] Navigating to account
+ [14:30:07 INF] Clicked element: By.XPath: //button[contains(@class, 'account')]
+ [14:30:07 INF] Navigating to sign up
+ [14:30:27 ERR] Error clicking element: By.XPath: //a[contains(text(), 'Sign Up')] - Timed out after 15 seconds
+ [14:30:27 INF] Screenshot saved: Screenshots\VerifySignUpPageLoads_2026-02-05_14-30-27.png
+ [14:30:27 ERR] Test Failed: VerifySignUpPageLoads
+ [14:30:28 INF] WebDriver quit successfully
+
+
+[14:30:28 INF] Test Started: AddProductToCartAndVerify
+[14:30:33 INF] WebDriver initialized successfully
+[14:30:33 INF] Test Started: AddProductToCartAndVerify
+[14:30:41 INF] WebDriver initialized successfully
+[14:30:41 INF] Searching for product: phone
+[14:31:02 ERR] Timeout waiting for element: By.XPath: //input[@placeholder='Search for anything']
+[14:31:02 ERR] Error sending keys to element: By.XPath: //input[@placeholder='Search for anything'] - Element not found within timeout: By.XPath: //input[@placeholder='Search for anything']
+[14:31:02 INF] Screenshot saved: Screenshots\AddProductToCartAndVerify_2026-02-05_14-31-02.png
+[14:31:02 ERR] Test Failed: AddProductToCartAndVerify
+[14:31:02 INF] WebDriver quit successfully
+
+  Failed AddProductToCartAndVerify [34 s]
+  Error Message:
+   System.TimeoutException : Element not found within timeout: By.XPath: //input[@placeholder='Search for anything']
+  ----> OpenQA.Selenium.WebDriverTimeoutException : Timed out after 15 seconds
+  Stack Trace:
+     at TakealotAutomation.Core.BasePage.WaitForElementToBeVisible(By locator) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\BasePage.cs:line 54
+   at TakealotAutomation.Core.BasePage.WaitAndSendKeys(By locator, String text) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\BasePage.cs:line 100
+   at TakealotAutomation.Pages.HomePage.SearchForProduct(String productName) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Pages\HomePage.cs:line 27
+   at TakealotAutomation.Tests.CartFunctionalityTests.AddProductToCartAndVerify() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\CartFunctionalityTests.cs:line 42
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+--WebDriverTimeoutException
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.ThrowTimeoutException(String exceptionMessage, Exception lastException)
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.Until[TResult](Func`2 condition, CancellationToken token)
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.Until[TResult](Func`2 condition)
+   at TakealotAutomation.Core.BasePage.WaitForElementToBeVisible(By locator) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\BasePage.cs:line 30
+
+  Standard Output Messages:
+ [14:30:28 INF] Test Started: AddProductToCartAndVerify
+ [14:30:33 INF] WebDriver initialized successfully
+ [14:30:33 INF] Test Started: AddProductToCartAndVerify
+ [14:30:41 INF] WebDriver initialized successfully
+ [14:30:41 INF] Searching for product: phone
+ [14:31:02 ERR] Timeout waiting for element: By.XPath: //input[@placeholder='Search for anything']
+ [14:31:02 ERR] Error sending keys to element: By.XPath: //input[@placeholder='Search for anything'] - Element not found within timeout: By.XPath: //input[@placeholder='Search for anything']
+ [14:31:02 INF] Screenshot saved: Screenshots\AddProductToCartAndVerify_2026-02-05_14-31-02.png
+ [14:31:02 ERR] Test Failed: AddProductToCartAndVerify
+ [14:31:02 INF] WebDriver quit successfully
+
+
+[14:31:02 INF] Test Started: ApplyPromoCodeToCart
+[14:31:09 INF] WebDriver initialized successfully
+[14:31:09 INF] Test Started: ApplyPromoCodeToCart
+[14:31:16 INF] WebDriver initialized successfully
+[14:31:16 INF] Searching for product: phone
+[14:31:36 ERR] Timeout waiting for element: By.XPath: //input[@placeholder='Search for anything']
+[14:31:36 ERR] Error sending keys to element: By.XPath: //input[@placeholder='Search for anything'] - Element not found within timeout: By.XPath: //input[@placeholder='Search for anything']
+[14:31:36 INF] Screenshot saved: Screenshots\ApplyPromoCodeToCart_2026-02-05_14-31-36.png
+[14:31:36 ERR] Test Failed: ApplyPromoCodeToCart
+[14:34:20 INF] WebDriver quit successfully
+
+  Failed ApplyPromoCodeToCart [3 m 17 s]
+  Error Message:
+   System.TimeoutException : Element not found within timeout: By.XPath: //input[@placeholder='Search for anything']
+  ----> OpenQA.Selenium.WebDriverTimeoutException : Timed out after 15 seconds
+  Stack Trace:
+     at TakealotAutomation.Core.BasePage.WaitForElementToBeVisible(By locator) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\BasePage.cs:line 54
+   at TakealotAutomation.Core.BasePage.WaitAndSendKeys(By locator, String text) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\BasePage.cs:line 100
+   at TakealotAutomation.Pages.HomePage.SearchForProduct(String productName) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Pages\HomePage.cs:line 27
+   at TakealotAutomation.Tests.CartFunctionalityTests.ApplyPromoCodeToCart() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\CartFunctionalityTests.cs:line 100
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+--WebDriverTimeoutException
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.ThrowTimeoutException(String exceptionMessage, Exception lastException)
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.Until[TResult](Func`2 condition, CancellationToken token)
+   at OpenQA.Selenium.Support.UI.DefaultWait`1.Until[TResult](Func`2 condition)
+   at TakealotAutomation.Core.BasePage.WaitForElementToBeVisible(By locator) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\BasePage.cs:line 30
+
+  Standard Output Messages:
+ [14:31:02 INF] Test Started: ApplyPromoCodeToCart
+ [14:31:09 INF] WebDriver initialized successfully
+ [14:31:09 INF] Test Started: ApplyPromoCodeToCart
+ [14:31:16 INF] WebDriver initialized successfully
+ [14:31:16 INF] Searching for product: phone
+ [14:31:36 ERR] Timeout waiting for element: By.XPath: //input[@placeholder='Search for anything']
+ [14:31:36 ERR] Error sending keys to element: By.XPath: //input[@placeholder='Search for anything'] - Element not found within timeout: By.XPath: //input[@placeholder='Search for anything']
+ [14:31:36 INF] Screenshot saved: Screenshots\ApplyPromoCodeToCart_2026-02-05_14-31-36.png
+ [14:31:36 ERR] Test Failed: ApplyPromoCodeToCart
+ [14:34:20 INF] WebDriver quit successfully
+
+
+[14:34:20 INF] Test Started: ProceedToCheckoutFromCart
+[14:34:23 ERR] Error taking screenshot: Cannot access a disposed object.
+Object name: 'System.Net.Http.HttpClient'.
+[14:34:23 ERR] Test Failed: ProceedToCheckoutFromCart
+[14:34:23 INF] WebDriver quit successfully
+
+  Failed ProceedToCheckoutFromCart [2 s]
+  Error Message:
+   System.Net.WebException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Http.HttpRequestException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Sockets.SocketException : No such host is known.
+  Stack Trace:
+     at System.Net.HttpWebRequest.GetResponse()
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion(String url)
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion()
+   at WebDriverManager.DriverManager.GetVersionToDownload(IDriverConfig config, String version)
+   at WebDriverManager.DriverManager.SetUpDriver(IDriverConfig config, String version, Architecture architecture)
+   at TakealotAutomation.Core.DriverFactory.InitializeChromeDriver() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 34
+   at TakealotAutomation.Core.DriverFactory.CreateDriver(String browserType) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 20
+   at TakealotAutomation.Tests.BaseTest.SetUp() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\BaseTest.cs:line 36
+   at InvokeStub_BaseTest.SetUp(Object, Object, IntPtr*)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+--HttpRequestException
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellation(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.Metrics.MetricsHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async, HttpContent content)
+   at System.Net.HttpWebRequest.HandleResponse(Boolean async)
+   at System.Net.HttpWebRequest.GetResponse()
+--SocketException
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, Nullable`1 activityOrDefault)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress, AddressFamily family)
+   at System.Net.HttpWebRequest.<>c__DisplayClass224_0.<<CreateHttpClient>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+
+  Standard Output Messages:
+ [14:34:20 INF] Test Started: ProceedToCheckoutFromCart
+ [14:34:23 ERR] Error taking screenshot: Cannot access a disposed object.
+ Object name: 'System.Net.Http.HttpClient'.
+ [14:34:23 ERR] Test Failed: ProceedToCheckoutFromCart
+ [14:34:23 INF] WebDriver quit successfully
+
+
+[14:34:24 INF] Test Started: VerifyCartTotal
+[14:34:25 ERR] Error taking screenshot: Cannot access a disposed object.
+Object name: 'System.Net.Http.HttpClient'.
+[14:34:25 ERR] Test Failed: VerifyCartTotal
+[14:34:26 INF] WebDriver quit successfully
+
+  Failed VerifyCartTotal [1 s]
+  Error Message:
+   System.Net.WebException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Http.HttpRequestException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Sockets.SocketException : No such host is known.
+  Stack Trace:
+     at System.Net.HttpWebRequest.GetResponse()
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion(String url)
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion()
+   at WebDriverManager.DriverManager.GetVersionToDownload(IDriverConfig config, String version)
+   at WebDriverManager.DriverManager.SetUpDriver(IDriverConfig config, String version, Architecture architecture)
+   at TakealotAutomation.Core.DriverFactory.InitializeChromeDriver() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 34
+   at TakealotAutomation.Core.DriverFactory.CreateDriver(String browserType) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 20
+   at TakealotAutomation.Tests.BaseTest.SetUp() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\BaseTest.cs:line 36
+   at InvokeStub_BaseTest.SetUp(Object, Object, IntPtr*)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+--HttpRequestException
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellation(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.Metrics.MetricsHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async, HttpContent content)
+   at System.Net.HttpWebRequest.HandleResponse(Boolean async)
+   at System.Net.HttpWebRequest.GetResponse()
+--SocketException
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, Nullable`1 activityOrDefault)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress, AddressFamily family)
+   at System.Net.HttpWebRequest.<>c__DisplayClass224_0.<<CreateHttpClient>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+
+  Standard Output Messages:
+ [14:34:24 INF] Test Started: VerifyCartTotal
+ [14:34:25 ERR] Error taking screenshot: Cannot access a disposed object.
+ Object name: 'System.Net.Http.HttpClient'.
+ [14:34:25 ERR] Test Failed: VerifyCartTotal
+ [14:34:26 INF] WebDriver quit successfully
+
+
+[14:34:27 INF] Test Started: VerifyEmptyCartDisplay
+[14:34:29 ERR] Error taking screenshot: Cannot access a disposed object.
+Object name: 'System.Net.Http.HttpClient'.
+[14:34:29 ERR] Test Failed: VerifyEmptyCartDisplay
+[14:34:29 INF] WebDriver quit successfully
+
+  Failed VerifyEmptyCartDisplay [1 s]
+  Error Message:
+   System.Net.WebException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Http.HttpRequestException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Sockets.SocketException : No such host is known.
+  Stack Trace:
+     at System.Net.HttpWebRequest.GetResponse()
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion(String url)
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion()
+   at WebDriverManager.DriverManager.GetVersionToDownload(IDriverConfig config, String version)
+   at WebDriverManager.DriverManager.SetUpDriver(IDriverConfig config, String version, Architecture architecture)
+   at TakealotAutomation.Core.DriverFactory.InitializeChromeDriver() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 34
+   at TakealotAutomation.Core.DriverFactory.CreateDriver(String browserType) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 20
+   at TakealotAutomation.Tests.BaseTest.SetUp() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\BaseTest.cs:line 36
+   at InvokeStub_BaseTest.SetUp(Object, Object, IntPtr*)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+--HttpRequestException
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellation(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.Metrics.MetricsHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async, HttpContent content)
+   at System.Net.HttpWebRequest.HandleResponse(Boolean async)
+   at System.Net.HttpWebRequest.GetResponse()
+--SocketException
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, Nullable`1 activityOrDefault)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress, AddressFamily family)
+   at System.Net.HttpWebRequest.<>c__DisplayClass224_0.<<CreateHttpClient>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+
+  Standard Output Messages:
+ [14:34:27 INF] Test Started: VerifyEmptyCartDisplay
+ [14:34:29 ERR] Error taking screenshot: Cannot access a disposed object.
+ Object name: 'System.Net.Http.HttpClient'.
+ [14:34:29 ERR] Test Failed: VerifyEmptyCartDisplay
+ [14:34:29 INF] WebDriver quit successfully
+
+
+[14:34:32 INF] Test Started: CompleteCheckoutProcess
+[14:34:44 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+[14:34:44 ERR] Test Failed: CompleteCheckoutProcess
+
+  Failed CompleteCheckoutProcess [12 s]
+  Error Message:
+   System.Net.WebException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Http.HttpRequestException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Sockets.SocketException : No such host is known.
+  Stack Trace:
+     at System.Net.HttpWebRequest.GetResponse()
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion(String url)
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion()
+   at WebDriverManager.DriverManager.GetVersionToDownload(IDriverConfig config, String version)
+   at WebDriverManager.DriverManager.SetUpDriver(IDriverConfig config, String version, Architecture architecture)
+   at TakealotAutomation.Core.DriverFactory.InitializeChromeDriver() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 34
+   at TakealotAutomation.Core.DriverFactory.CreateDriver(String browserType) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 20
+   at TakealotAutomation.Tests.BaseTest.SetUp() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\BaseTest.cs:line 36
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+--HttpRequestException
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellation(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.Metrics.MetricsHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async, HttpContent content)
+   at System.Net.HttpWebRequest.HandleResponse(Boolean async)
+   at System.Net.HttpWebRequest.GetResponse()
+--SocketException
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, Nullable`1 activityOrDefault)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress, AddressFamily family)
+   at System.Net.HttpWebRequest.<>c__DisplayClass224_0.<<CreateHttpClient>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+
+  Standard Output Messages:
+ [14:34:32 INF] Test Started: CompleteCheckoutProcess
+ [14:34:44 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+ [14:34:44 ERR] Test Failed: CompleteCheckoutProcess
+
+
+[14:34:45 INF] Test Started: FillCustomerInformation
+[14:34:46 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+[14:34:46 ERR] Test Failed: FillCustomerInformation
+
+  Failed FillCustomerInformation [351 ms]
+  Error Message:
+   System.Net.WebException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Http.HttpRequestException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Sockets.SocketException : No such host is known.
+  Stack Trace:
+     at System.Net.HttpWebRequest.GetResponse()
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion(String url)
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion()
+   at WebDriverManager.DriverManager.GetVersionToDownload(IDriverConfig config, String version)
+   at WebDriverManager.DriverManager.SetUpDriver(IDriverConfig config, String version, Architecture architecture)
+   at TakealotAutomation.Core.DriverFactory.InitializeChromeDriver() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 34
+   at TakealotAutomation.Core.DriverFactory.CreateDriver(String browserType) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 20
+   at TakealotAutomation.Tests.BaseTest.SetUp() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\BaseTest.cs:line 36
+   at InvokeStub_BaseTest.SetUp(Object, Object, IntPtr*)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+--HttpRequestException
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellation(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.Metrics.MetricsHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async, HttpContent content)
+   at System.Net.HttpWebRequest.HandleResponse(Boolean async)
+   at System.Net.HttpWebRequest.GetResponse()
+--SocketException
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, Nullable`1 activityOrDefault)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress, AddressFamily family)
+   at System.Net.HttpWebRequest.<>c__DisplayClass224_0.<<CreateHttpClient>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+
+  Standard Output Messages:
+ [14:34:45 INF] Test Started: FillCustomerInformation
+ [14:34:46 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+ [14:34:46 ERR] Test Failed: FillCustomerInformation
+
+
+[14:34:46 INF] Test Started: FillDeliveryAddress
+[14:34:47 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+[14:34:47 ERR] Test Failed: FillDeliveryAddress
+
+[14:34:47 INF] Test Started: VerifyCheckoutPageLoads
+[14:34:47 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+[14:34:47 ERR] Test Failed: VerifyCheckoutPageLoads
+
+  Failed FillDeliveryAddress [713 ms]
+  Error Message:
+   System.Net.WebException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Http.HttpRequestException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Sockets.SocketException : No such host is known.
+  Stack Trace:
+     at System.Net.HttpWebRequest.GetResponse()
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion(String url)
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion()
+   at WebDriverManager.DriverManager.GetVersionToDownload(IDriverConfig config, String version)
+   at WebDriverManager.DriverManager.SetUpDriver(IDriverConfig config, String version, Architecture architecture)
+   at TakealotAutomation.Core.DriverFactory.InitializeChromeDriver() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 34
+   at TakealotAutomation.Core.DriverFactory.CreateDriver(String browserType) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 20
+   at TakealotAutomation.Tests.BaseTest.SetUp() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\BaseTest.cs:line 36
+   at InvokeStub_BaseTest.SetUp(Object, Object, IntPtr*)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+--HttpRequestException
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellation(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.Metrics.MetricsHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async, HttpContent content)
+   at System.Net.HttpWebRequest.HandleResponse(Boolean async)
+   at System.Net.HttpWebRequest.GetResponse()
+--SocketException
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, Nullable`1 activityOrDefault)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress, AddressFamily family)
+   at System.Net.HttpWebRequest.<>c__DisplayClass224_0.<<CreateHttpClient>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+
+  Standard Output Messages:
+ [14:34:46 INF] Test Started: FillDeliveryAddress
+ [14:34:47 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+ [14:34:47 ERR] Test Failed: FillDeliveryAddress
+
+
+  Failed VerifyCheckoutPageLoads [150 ms]
+  Error Message:
+   System.Net.WebException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Http.HttpRequestException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Sockets.SocketException : No such host is known.
+  Stack Trace:
+     at System.Net.HttpWebRequest.GetResponse()
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion(String url)
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion()
+   at WebDriverManager.DriverManager.GetVersionToDownload(IDriverConfig config, String version)
+   at WebDriverManager.DriverManager.SetUpDriver(IDriverConfig config, String version, Architecture architecture)
+   at TakealotAutomation.Core.DriverFactory.InitializeChromeDriver() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 34
+   at TakealotAutomation.Core.DriverFactory.CreateDriver(String browserType) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 20
+   at TakealotAutomation.Tests.BaseTest.SetUp() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\BaseTest.cs:line 36
+   at InvokeStub_BaseTest.SetUp(Object, Object, IntPtr*)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+--HttpRequestException
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellation(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.Metrics.MetricsHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async, HttpContent content)
+   at System.Net.HttpWebRequest.HandleResponse(Boolean async)
+   at System.Net.HttpWebRequest.GetResponse()
+--SocketException
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, Nullable`1 activityOrDefault)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress, AddressFamily family)
+   at System.Net.HttpWebRequest.<>c__DisplayClass224_0.<<CreateHttpClient>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+
+  Standard Output Messages:
+ [14:34:47 INF] Test Started: VerifyCheckoutPageLoads
+ [14:34:47 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+ [14:34:47 ERR] Test Failed: VerifyCheckoutPageLoads
+
+
+[14:34:49 INF] Test Started: VerifyCartAccessible
+[14:34:50 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+[14:34:50 ERR] Test Failed: VerifyCartAccessible
+
+  Failed VerifyCartAccessible [415 ms]
+  Error Message:
+   System.Net.WebException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Http.HttpRequestException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Sockets.SocketException : No such host is known.
+  Stack Trace:
+     at System.Net.HttpWebRequest.GetResponse()
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion(String url)
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion()
+   at WebDriverManager.DriverManager.GetVersionToDownload(IDriverConfig config, String version)
+   at WebDriverManager.DriverManager.SetUpDriver(IDriverConfig config, String version, Architecture architecture)
+   at TakealotAutomation.Core.DriverFactory.InitializeChromeDriver() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 34
+   at TakealotAutomation.Core.DriverFactory.CreateDriver(String browserType) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 20
+   at TakealotAutomation.Tests.BaseTest.SetUp() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\BaseTest.cs:line 36
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+--HttpRequestException
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellation(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.Metrics.MetricsHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async, HttpContent content)
+   at System.Net.HttpWebRequest.HandleResponse(Boolean async)
+   at System.Net.HttpWebRequest.GetResponse()
+--SocketException
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, Nullable`1 activityOrDefault)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress, AddressFamily family)
+   at System.Net.HttpWebRequest.<>c__DisplayClass224_0.<<CreateHttpClient>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+
+  Standard Output Messages:
+ [14:34:49 INF] Test Started: VerifyCartAccessible
+ [14:34:50 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+ [14:34:50 ERR] Test Failed: VerifyCartAccessible
+
+
+[14:34:50 INF] Test Started: VerifyHomePageLoads
+[14:34:51 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+[14:34:51 ERR] Test Failed: VerifyHomePageLoads
+
+  Failed VerifyHomePageLoads [1 s]
+  Error Message:
+   System.Net.WebException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Http.HttpRequestException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Sockets.SocketException : No such host is known.
+  Stack Trace:
+     at System.Net.HttpWebRequest.GetResponse()
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion(String url)
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion()
+   at WebDriverManager.DriverManager.GetVersionToDownload(IDriverConfig config, String version)
+   at WebDriverManager.DriverManager.SetUpDriver(IDriverConfig config, String version, Architecture architecture)
+   at TakealotAutomation.Core.DriverFactory.InitializeChromeDriver() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 34
+   at TakealotAutomation.Core.DriverFactory.CreateDriver(String browserType) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 20
+   at TakealotAutomation.Tests.BaseTest.SetUp() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\BaseTest.cs:line 36
+   at InvokeStub_BaseTest.SetUp(Object, Object, IntPtr*)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+--HttpRequestException
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellation(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.Metrics.MetricsHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async, HttpContent content)
+   at System.Net.HttpWebRequest.HandleResponse(Boolean async)
+   at System.Net.HttpWebRequest.GetResponse()
+--SocketException
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, Nullable`1 activityOrDefault)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress, AddressFamily family)
+   at System.Net.HttpWebRequest.<>c__DisplayClass224_0.<<CreateHttpClient>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+
+  Standard Output Messages:
+ [14:34:50 INF] Test Started: VerifyHomePageLoads
+ [14:34:51 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+ [14:34:51 ERR] Test Failed: VerifyHomePageLoads
+
+
+[14:34:51 INF] Test Started: VerifyPageTitle
+[14:35:00 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+[14:35:00 ERR] Test Failed: VerifyPageTitle
+
+  Failed VerifyPageTitle [8 s]
+  Error Message:
+   System.Net.WebException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Http.HttpRequestException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Sockets.SocketException : No such host is known.
+  Stack Trace:
+     at System.Net.HttpWebRequest.GetResponse()
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion(String url)
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion()
+   at WebDriverManager.DriverManager.GetVersionToDownload(IDriverConfig config, String version)
+   at WebDriverManager.DriverManager.SetUpDriver(IDriverConfig config, String version, Architecture architecture)
+   at TakealotAutomation.Core.DriverFactory.InitializeChromeDriver() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 34
+   at TakealotAutomation.Core.DriverFactory.CreateDriver(String browserType) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 20
+   at TakealotAutomation.Tests.BaseTest.SetUp() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\BaseTest.cs:line 36
+   at InvokeStub_BaseTest.SetUp(Object, Object, IntPtr*)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+--HttpRequestException
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellation(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.Metrics.MetricsHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async, HttpContent content)
+   at System.Net.HttpWebRequest.HandleResponse(Boolean async)
+   at System.Net.HttpWebRequest.GetResponse()
+--SocketException
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, Nullable`1 activityOrDefault)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress, AddressFamily family)
+   at System.Net.HttpWebRequest.<>c__DisplayClass224_0.<<CreateHttpClient>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+
+  Standard Output Messages:
+ [14:34:51 INF] Test Started: VerifyPageTitle
+ [14:35:00 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+ [14:35:00 ERR] Test Failed: VerifyPageTitle
+
+
+[14:35:01 INF] Test Started: VerifySearchFunctionality
+[14:35:01 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+[14:35:01 ERR] Test Failed: VerifySearchFunctionality
+
+  Failed VerifySearchFunctionality [142 ms]
+  Error Message:
+   System.Net.WebException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Http.HttpRequestException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Sockets.SocketException : No such host is known.
+  Stack Trace:
+     at System.Net.HttpWebRequest.GetResponse()
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion(String url)
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion()
+   at WebDriverManager.DriverManager.GetVersionToDownload(IDriverConfig config, String version)
+   at WebDriverManager.DriverManager.SetUpDriver(IDriverConfig config, String version, Architecture architecture)
+   at TakealotAutomation.Core.DriverFactory.InitializeChromeDriver() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 34
+   at TakealotAutomation.Core.DriverFactory.CreateDriver(String browserType) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 20
+   at TakealotAutomation.Tests.BaseTest.SetUp() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\BaseTest.cs:line 36
+   at InvokeStub_BaseTest.SetUp(Object, Object, IntPtr*)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+--HttpRequestException
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellation(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.Metrics.MetricsHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async, HttpContent content)
+   at System.Net.HttpWebRequest.HandleResponse(Boolean async)
+   at System.Net.HttpWebRequest.GetResponse()
+--SocketException
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, Nullable`1 activityOrDefault)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress, AddressFamily family)
+   at System.Net.HttpWebRequest.<>c__DisplayClass224_0.<<CreateHttpClient>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+
+  Standard Output Messages:
+ [14:35:01 INF] Test Started: VerifySearchFunctionality
+ [14:35:01 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+ [14:35:01 ERR] Test Failed: VerifySearchFunctionality
+
+
+[14:35:04 INF] Test Started: AddProductToCart
+[14:35:17 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+[14:35:17 ERR] Test Failed: AddProductToCart
+
+  Failed AddProductToCart [12 s]
+  Error Message:
+   System.Net.WebException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Http.HttpRequestException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Sockets.SocketException : No such host is known.
+  Stack Trace:
+     at System.Net.HttpWebRequest.GetResponse()
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion(String url)
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion()
+   at WebDriverManager.DriverManager.GetVersionToDownload(IDriverConfig config, String version)
+   at WebDriverManager.DriverManager.SetUpDriver(IDriverConfig config, String version, Architecture architecture)
+   at TakealotAutomation.Core.DriverFactory.InitializeChromeDriver() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 34
+   at TakealotAutomation.Core.DriverFactory.CreateDriver(String browserType) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 20
+   at TakealotAutomation.Tests.BaseTest.SetUp() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\BaseTest.cs:line 36
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Method(Object obj, IntPtr* args)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+--HttpRequestException
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellation(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.Metrics.MetricsHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async, HttpContent content)
+   at System.Net.HttpWebRequest.HandleResponse(Boolean async)
+   at System.Net.HttpWebRequest.GetResponse()
+--SocketException
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, Nullable`1 activityOrDefault)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress, AddressFamily family)
+   at System.Net.HttpWebRequest.<>c__DisplayClass224_0.<<CreateHttpClient>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+
+  Standard Output Messages:
+ [14:35:04 INF] Test Started: AddProductToCart
+ [14:35:17 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+ [14:35:17 ERR] Test Failed: AddProductToCart
+
+
+[14:35:17 INF] Test Started: AddProductToWishlist
+[14:35:30 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+[14:35:30 ERR] Test Failed: AddProductToWishlist
+
+  Failed AddProductToWishlist [12 s]
+  Error Message:
+   System.Net.WebException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Http.HttpRequestException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Sockets.SocketException : No such host is known.
+  Stack Trace:
+     at System.Net.HttpWebRequest.GetResponse()
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion(String url)
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion()
+   at WebDriverManager.DriverManager.GetVersionToDownload(IDriverConfig config, String version)
+   at WebDriverManager.DriverManager.SetUpDriver(IDriverConfig config, String version, Architecture architecture)
+   at TakealotAutomation.Core.DriverFactory.InitializeChromeDriver() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 34
+   at TakealotAutomation.Core.DriverFactory.CreateDriver(String browserType) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 20
+   at TakealotAutomation.Tests.BaseTest.SetUp() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\BaseTest.cs:line 36
+   at InvokeStub_BaseTest.SetUp(Object, Object, IntPtr*)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+--HttpRequestException
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellation(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.Metrics.MetricsHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async, HttpContent content)
+   at System.Net.HttpWebRequest.HandleResponse(Boolean async)
+   at System.Net.HttpWebRequest.GetResponse()
+--SocketException
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, Nullable`1 activityOrDefault)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress, AddressFamily family)
+   at System.Net.HttpWebRequest.<>c__DisplayClass224_0.<<CreateHttpClient>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+
+  Standard Output Messages:
+ [14:35:17 INF] Test Started: AddProductToWishlist
+ [14:35:30 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+ [14:35:30 ERR] Test Failed: AddProductToWishlist
+
+
+[14:35:30 INF] Test Started: ClickProductAndVerifyDetailsPage
+[14:35:42 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+[14:35:42 ERR] Test Failed: ClickProductAndVerifyDetailsPage
+
+  Failed ClickProductAndVerifyDetailsPage [12 s]
+  Error Message:
+   System.Net.WebException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Http.HttpRequestException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Sockets.SocketException : No such host is known.
+  Stack Trace:
+     at System.Net.HttpWebRequest.GetResponse()
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion(String url)
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion()
+   at WebDriverManager.DriverManager.GetVersionToDownload(IDriverConfig config, String version)
+   at WebDriverManager.DriverManager.SetUpDriver(IDriverConfig config, String version, Architecture architecture)
+   at TakealotAutomation.Core.DriverFactory.InitializeChromeDriver() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 34
+   at TakealotAutomation.Core.DriverFactory.CreateDriver(String browserType) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 20
+   at TakealotAutomation.Tests.BaseTest.SetUp() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\BaseTest.cs:line 36
+   at InvokeStub_BaseTest.SetUp(Object, Object, IntPtr*)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+--HttpRequestException
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellation(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.Metrics.MetricsHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async, HttpContent content)
+   at System.Net.HttpWebRequest.HandleResponse(Boolean async)
+   at System.Net.HttpWebRequest.GetResponse()
+--SocketException
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, Nullable`1 activityOrDefault)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress, AddressFamily family)
+   at System.Net.HttpWebRequest.<>c__DisplayClass224_0.<<CreateHttpClient>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+
+  Standard Output Messages:
+ [14:35:30 INF] Test Started: ClickProductAndVerifyDetailsPage
+ [14:35:42 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+ [14:35:42 ERR] Test Failed: ClickProductAndVerifyDetailsPage
+
+
+[14:35:43 INF] Test Started: SearchForValidProduct("phone")
+[14:35:44 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+[14:35:44 ERR] Test Failed: SearchForValidProduct("phone")
+
+  Failed SearchForValidProduct("phone") [973 ms]
+  Error Message:
+   System.Net.WebException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Http.HttpRequestException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Sockets.SocketException : No such host is known.
+  Stack Trace:
+     at System.Net.HttpWebRequest.GetResponse()
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion(String url)
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion()
+   at WebDriverManager.DriverManager.GetVersionToDownload(IDriverConfig config, String version)
+   at WebDriverManager.DriverManager.SetUpDriver(IDriverConfig config, String version, Architecture architecture)
+   at TakealotAutomation.Core.DriverFactory.InitializeChromeDriver() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 34
+   at TakealotAutomation.Core.DriverFactory.CreateDriver(String browserType) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 20
+   at TakealotAutomation.Tests.BaseTest.SetUp() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\BaseTest.cs:line 36
+   at InvokeStub_BaseTest.SetUp(Object, Object, IntPtr*)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+--HttpRequestException
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellation(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.Metrics.MetricsHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async, HttpContent content)
+   at System.Net.HttpWebRequest.HandleResponse(Boolean async)
+   at System.Net.HttpWebRequest.GetResponse()
+--SocketException
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, Nullable`1 activityOrDefault)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress, AddressFamily family)
+   at System.Net.HttpWebRequest.<>c__DisplayClass224_0.<<CreateHttpClient>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+
+  Standard Output Messages:
+ [14:35:43 INF] Test Started: SearchForValidProduct("phone")
+ [14:35:44 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+ [14:35:44 ERR] Test Failed: SearchForValidProduct("phone")
+
+
+[14:35:45 INF] Test Started: SearchForValidProduct("headphones")
+[14:35:45 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+[14:35:45 ERR] Test Failed: SearchForValidProduct("headphones")
+
+  Failed SearchForValidProduct("headphones") [257 ms]
+  Error Message:
+   System.Net.WebException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Http.HttpRequestException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Sockets.SocketException : No such host is known.
+  Stack Trace:
+     at System.Net.HttpWebRequest.GetResponse()
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion(String url)
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion()
+   at WebDriverManager.DriverManager.GetVersionToDownload(IDriverConfig config, String version)
+   at WebDriverManager.DriverManager.SetUpDriver(IDriverConfig config, String version, Architecture architecture)
+   at TakealotAutomation.Core.DriverFactory.InitializeChromeDriver() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 34
+   at TakealotAutomation.Core.DriverFactory.CreateDriver(String browserType) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 20
+   at TakealotAutomation.Tests.BaseTest.SetUp() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\BaseTest.cs:line 36
+   at InvokeStub_BaseTest.SetUp(Object, Object, IntPtr*)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+--HttpRequestException
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellation(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.Metrics.MetricsHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async, HttpContent content)
+   at System.Net.HttpWebRequest.HandleResponse(Boolean async)
+   at System.Net.HttpWebRequest.GetResponse()
+--SocketException
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, Nullable`1 activityOrDefault)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress, AddressFamily family)
+   at System.Net.HttpWebRequest.<>c__DisplayClass224_0.<<CreateHttpClient>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+
+  Standard Output Messages:
+ [14:35:45 INF] Test Started: SearchForValidProduct("headphones")
+ [14:35:45 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+ [14:35:45 ERR] Test Failed: SearchForValidProduct("headphones")
+
+
+[14:35:46 INF] Test Started: SearchForValidProduct("tablet")
+[14:35:47 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+[14:35:47 ERR] Test Failed: SearchForValidProduct("tablet")
+
+  Failed SearchForValidProduct("tablet") [1 s]
+  Error Message:
+   System.Net.WebException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Http.HttpRequestException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Sockets.SocketException : No such host is known.
+  Stack Trace:
+     at System.Net.HttpWebRequest.GetResponse()
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion(String url)
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion()
+   at WebDriverManager.DriverManager.GetVersionToDownload(IDriverConfig config, String version)
+   at WebDriverManager.DriverManager.SetUpDriver(IDriverConfig config, String version, Architecture architecture)
+   at TakealotAutomation.Core.DriverFactory.InitializeChromeDriver() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 34
+   at TakealotAutomation.Core.DriverFactory.CreateDriver(String browserType) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 20
+   at TakealotAutomation.Tests.BaseTest.SetUp() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\BaseTest.cs:line 36
+   at InvokeStub_BaseTest.SetUp(Object, Object, IntPtr*)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+--HttpRequestException
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellation(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.Metrics.MetricsHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async, HttpContent content)
+   at System.Net.HttpWebRequest.HandleResponse(Boolean async)
+   at System.Net.HttpWebRequest.GetResponse()
+--SocketException
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, Nullable`1 activityOrDefault)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress, AddressFamily family)
+   at System.Net.HttpWebRequest.<>c__DisplayClass224_0.<<CreateHttpClient>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+
+  Standard Output Messages:
+ [14:35:46 INF] Test Started: SearchForValidProduct("tablet")
+ [14:35:47 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+ [14:35:47 ERR] Test Failed: SearchForValidProduct("tablet")
+
+
+[14:35:48 INF] Test Started: VerifyProductDetailsDisplay
+[14:35:48 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+[14:35:48 ERR] Test Failed: VerifyProductDetailsDisplay
+
+  Failed VerifyProductDetailsDisplay [558 ms]
+  Error Message:
+   System.Net.WebException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Http.HttpRequestException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Sockets.SocketException : No such host is known.
+  Stack Trace:
+     at System.Net.HttpWebRequest.GetResponse()
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion(String url)
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion()
+   at WebDriverManager.DriverManager.GetVersionToDownload(IDriverConfig config, String version)
+   at WebDriverManager.DriverManager.SetUpDriver(IDriverConfig config, String version, Architecture architecture)
+   at TakealotAutomation.Core.DriverFactory.InitializeChromeDriver() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 34
+   at TakealotAutomation.Core.DriverFactory.CreateDriver(String browserType) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 20
+   at TakealotAutomation.Tests.BaseTest.SetUp() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\BaseTest.cs:line 36
+   at InvokeStub_BaseTest.SetUp(Object, Object, IntPtr*)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+--HttpRequestException
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellation(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.Metrics.MetricsHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async, HttpContent content)
+   at System.Net.HttpWebRequest.HandleResponse(Boolean async)
+   at System.Net.HttpWebRequest.GetResponse()
+--SocketException
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, Nullable`1 activityOrDefault)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress, AddressFamily family)
+   at System.Net.HttpWebRequest.<>c__DisplayClass224_0.<<CreateHttpClient>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+
+  Standard Output Messages:
+ [14:35:48 INF] Test Started: VerifyProductDetailsDisplay
+ [14:35:48 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+ [14:35:48 ERR] Test Failed: VerifyProductDetailsDisplay
+
+
+[14:35:49 INF] Test Started: VerifyQuantitySelector
+[14:35:49 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+[14:35:49 ERR] Test Failed: VerifyQuantitySelector
+
+  Failed VerifyQuantitySelector [665 ms]
+  Error Message:
+   System.Net.WebException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Http.HttpRequestException : No such host is known. (chromedriver.storage.googleapis.com:443)
+  ----> System.Net.Sockets.SocketException : No such host is known.
+  Stack Trace:
+     at System.Net.HttpWebRequest.GetResponse()
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion(String url)
+   at WebDriverManager.DriverConfigs.Impl.ChromeConfig.GetLatestVersion()
+   at WebDriverManager.DriverManager.GetVersionToDownload(IDriverConfig config, String version)
+   at WebDriverManager.DriverManager.SetUpDriver(IDriverConfig config, String version, Architecture architecture)
+   at TakealotAutomation.Core.DriverFactory.InitializeChromeDriver() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 34
+   at TakealotAutomation.Core.DriverFactory.CreateDriver(String browserType) in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Core\DriverFactory.cs:line 20
+   at TakealotAutomation.Tests.BaseTest.SetUp() in C:\Users\Monnelisa\OneDrive - Cnnect\Desktop\Monnelisa\Takealot-Automation-Framework\Tests\BaseTest.cs:line 36
+   at InvokeStub_BaseTest.SetUp(Object, Object, IntPtr*)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+--HttpRequestException
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.InjectNewHttp11ConnectionAsync(QueueItem queueItem)
+   at System.Threading.Tasks.TaskCompletionSourceWithCancellation`1.WaitWithCancellation(CancellationToken cancellationToken)
+   at System.Net.Http.HttpConnectionPool.SendWithVersionDetectionAndRetryAsync(HttpRequestMessage request, Boolean async, Boolean doRequestAuth, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.Metrics.MetricsHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, Boolean async, CancellationToken cancellationToken)
+   at System.Net.Http.HttpMessageHandlerStage.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.SocketsHttpHandler.Send(HttpRequestMessage request, CancellationToken cancellationToken)
+   at System.Net.Http.HttpClient.Send(HttpRequestMessage request, HttpCompletionOption completionOption, CancellationToken cancellationToken)
+   at System.Net.HttpWebRequest.SendRequest(Boolean async, HttpContent content)
+   at System.Net.HttpWebRequest.HandleResponse(Boolean async)
+   at System.Net.HttpWebRequest.GetResponse()
+--SocketException
+   at System.Net.Dns.GetHostEntryOrAddressesCore(String hostName, Boolean justAddresses, AddressFamily addressFamily, Nullable`1 activityOrDefault)
+   at System.Net.Dns.GetHostAddresses(String hostNameOrAddress, AddressFamily family)
+   at System.Net.HttpWebRequest.<>c__DisplayClass224_0.<<CreateHttpClient>b__1>d.MoveNext()
+--- End of stack trace from previous location ---
+   at System.Net.Http.HttpConnectionPool.ConnectToTcpHostAsync(String host, Int32 port, HttpRequestMessage initialRequest, Boolean async, CancellationToken cancellationToken)
+
+  Standard Output Messages:
+ [14:35:49 INF] Test Started: VerifyQuantitySelector
+ [14:35:49 ERR] Error taking screenshot: Object reference not set to an instance of an object.
+ [14:35:49 ERR] Test Failed: VerifyQuantitySelector
+
+
+
+Failed!  - Failed:    27, Passed:     0, Skipped:     0, Total:    27, Duration: 9 m 1 s - TakealotAutomation.dll (net10.0)
