@@ -4,36 +4,49 @@ using Serilog;
 namespace TakealotAutomation.Pages
 {
     /// <summary>
-    /// Page object for order confirmation
+    /// Page object for Sauce Demo order confirmation
     /// </summary>
     public class OrderConfirmationPage : Core.BasePage
     {
-        // Locators
-        private readonly By _orderNumberLocator = By.XPath("//span[contains(text(), 'Order Number:')]/following-sibling::span");
-        private readonly By _confirmationMessageLocator = By.XPath("//h1[contains(text(), 'Thank You')]");
-        private readonly By _orderDetailsLocator = By.XPath("//div[contains(@class, 'order-details')]");
-        private readonly By _continueShoppingButtonLocator = By.XPath("//button[contains(text(), 'Continue Shopping')]");
+        // Locators for Sauce Demo confirmation page
+        private readonly By _confirmationMessageLocator = By.ClassName("complete-header");
+        private readonly By _confirmationTextLocator = By.ClassName("complete-text");
+        private readonly By _backHomeButtonLocator = By.Id("back-to-products");
 
         public OrderConfirmationPage(IWebDriver driver) : base(driver) { }
-
-        /// <summary>
-        /// Gets order number
-        /// </summary>
-        public string GetOrderNumber()
-        {
-            string orderNumber = GetElementText(_orderNumberLocator);
-            Log.Information($"Order number: {orderNumber}");
-            return orderNumber;
-        }
 
         /// <summary>
         /// Gets confirmation message
         /// </summary>
         public string GetConfirmationMessage()
         {
-            string message = GetElementText(_confirmationMessageLocator);
-            Log.Information($"Confirmation message: {message}");
-            return message;
+            try
+            {
+                string message = GetElementText(_confirmationMessageLocator);
+                Log.Information($"Confirmation message: {message}");
+                return message;
+            }
+            catch
+            {
+                return "";
+            }
+        }
+
+        /// <summary>
+        /// Gets detailed confirmation text
+        /// </summary>
+        public string GetConfirmationText()
+        {
+            try
+            {
+                string text = GetElementText(_confirmationTextLocator);
+                Log.Information($"Confirmation text: {text}");
+                return text;
+            }
+            catch
+            {
+                return "";
+            }
         }
 
         /// <summary>
@@ -41,18 +54,18 @@ namespace TakealotAutomation.Pages
         /// </summary>
         public bool IsOrderConfirmationDisplayed()
         {
-            bool isDisplayed = IsElementPresent(_confirmationMessageLocator) && IsElementPresent(_orderNumberLocator);
+            bool isDisplayed = IsElementPresent(_confirmationMessageLocator);
             Log.Information($"Order confirmation displayed: {isDisplayed}");
             return isDisplayed;
         }
 
         /// <summary>
-        /// Continues shopping
+        /// Goes back to home/products page
         /// </summary>
-        public HomePage ContinueShopping()
+        public HomePage BackToHome()
         {
-            Log.Information("Continuing shopping");
-            WaitAndClick(_continueShoppingButtonLocator);
+            Log.Information("Going back home");
+            WaitAndClick(_backHomeButtonLocator);
             return new HomePage(Driver);
         }
     }

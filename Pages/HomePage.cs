@@ -1,32 +1,88 @@
 using OpenQA.Selenium;
 using Serilog;
+using System.Collections.Generic;
 
 namespace TakealotAutomation.Pages
 {
     /// <summary>
-    /// Page object for Takealot Homepage
+    /// Page object for Sauce Demo Inventory (Products) page
     /// </summary>
     public class HomePage : Core.BasePage
     {
-        // Locators
-        private readonly By _searchInputLocator = By.XPath("//input[@placeholder='Search for anything']");
-        private readonly By _searchButtonLocator = By.XPath("//button[contains(@class, 'search-button')]");
-        private readonly By _categoryMenuLocator = By.XPath("//button[contains(text(), 'Categories')]");
-        private readonly By _accountIconLocator = By.XPath("//button[contains(@class, 'account')]");
-        private readonly By _cartIconLocator = By.XPath("//button[contains(@class, 'basket')]");
-        private readonly By _viewAllCategoriesLocator = By.XPath("//a[contains(text(), 'View All')]");
+        // Locators for Sauce Demo inventory page
+        private readonly By _productItemsLocator = By.ClassName("inventory_item");
+        private readonly By _productNameLocator = By.ClassName("inventory_item_name");
+        private readonly By _productPriceLocator = By.ClassName("inventory_item_price");
+        private readonly By _addToCartButtonLocator = By.XPath("//button[contains(@class, 'btn_primary')]");
+        private readonly By _cartLinkLocator = By.ClassName("shopping_cart_link");
+        private readonly By _cartBadgeLocator = By.ClassName("shopping_cart_badge");
+        private readonly By _sortDropdownLocator = By.ClassName("product_sort_container");
+        private readonly By _menuButtonLocator = By.Id("react-burger-menu-btn");
+        private readonly By _logoutLinkLocator = By.Id("logout_sidebar_link");
+        private readonly By _titleLocator = By.ClassName("title");
 
         public HomePage(IWebDriver driver) : base(driver) { }
 
         /// <summary>
-        /// Searches for a product
+        /// Gets list of product items displayed
         /// </summary>
-        public SearchResultsPage SearchForProduct(string productName)
+        public IList<IWebElement> GetProductItems()
         {
-            Log.Information($"Searching for product: {productName}");
-            WaitAndSendKeys(_searchInputLocator, productName);
-            WaitAndClick(_searchButtonLocator);
-            return new SearchResultsPage(Driver);
+            var items = Driver.FindElements(_productItemsLocator);
+            Log.Information($"Found {items.Count} products");
+            return items;
+        }
+
+        /// <summary>
+        /// Gets product count
+        /// </summary>
+        public int GetProductCount()
+        {
+            int count = GetProductItems().Count;
+            Log.Information($"Product count: {count}");
+            return count;
+        }
+
+        /// <summary>
+        /// Clicks on first product to view details
+        /// </summary>
+        public ProductDetailsPage ClickFirstProduct()
+        {
+            Log.Information("Clicking first product");
+            var products = GetProductItems();
+            if (products.Count > 0)
+            {
+                products[0].FindElement(_productNameLocator).Click();
+            }
+            return new ProductDetailsPage(Driver);
+        }
+
+        /// <summary>
+        /// Clicks product by index
+        /// </summary>
+        public ProductDetailsPage ClickProductByIndex(int index)
+        {
+            Log.Information($"Clicking product at index: {index}");
+            var products = GetProductItems();
+            if (products.Count > index)
+            {
+                products[index].FindElement(_productNameLocator).Click();
+            }
+            return new ProductDetailsPage(Driver);
+        }
+
+        /// <summary>
+        /// Adds first product to cart
+        /// </summary>
+        public void AddFirstProductToCart()
+        {
+            Log.Information("Adding first product to cart");
+            var products = GetProductItems();
+            if (products.Count > 0)
+            {
+                var addButton = products[0].FindElement(_addToCartButtonLocator);
+                addButton.Click();
+            }
         }
 
         /// <summary>
@@ -35,18 +91,50 @@ namespace TakealotAutomation.Pages
         public CartPage GoToCart()
         {
             Log.Information("Navigating to cart");
-            WaitAndClick(_cartIconLocator);
+            WaitAndClick(_cartLinkLocator);
             return new CartPage(Driver);
         }
 
         /// <summary>
-        /// Opens account menu
+        /// Gets cart badge count
         /// </summary>
-        public AccountPage GoToAccount()
+        public int GetCartItemCount()
         {
-            Log.Information("Navigating to account");
-            WaitAndClick(_accountIconLocator);
-            return new AccountPage(Driver);
+            try
+            {
+                string badgeText = GetElementText(_cartBadgeLocator);
+                if (int.TryParse(badgeText, out int count))
+                {
+                    return count;
+                }
+                return 0;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
+
+        /// <summary>
+        /// Sorts products by option
+        /// </summary>
+        public void SortBy(string sortOption)
+        {
+            Log.Information($"Sorting by: {sortOption}");
+            WaitAndClick(_sortDropdownLocator);
+            var option = Driver.FindElement(By.XPath($"//option[contains(text(), '{sortOption}')]"));
+            option.Click();
+        }
+
+        /// <summary>
+        /// Opens menu and logs out
+        /// </summary>
+        public LoginPage Logout()
+        {
+            Log.Information("Logging out");
+            WaitAndClick(_menuButtonLocator);
+            WaitAndClick(_logoutLinkLocator);
+            return new LoginPage(Driver);
         }
 
         /// <summary>
@@ -54,7 +142,7 @@ namespace TakealotAutomation.Pages
         /// </summary>
         public bool IsHomePageLoaded()
         {
-            bool isLoaded = IsElementPresent(_searchInputLocator);
+            bool isLoaded = IsElementPresent(_productItemsLocator);
             Log.Information($"Home page loaded: {isLoaded}");
             return isLoaded;
         }

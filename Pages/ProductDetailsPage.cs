@@ -4,20 +4,18 @@ using Serilog;
 namespace TakealotAutomation.Pages
 {
     /// <summary>
-    /// Page object for product details
+    /// Page object for Sauce Demo product details page
     /// </summary>
     public class ProductDetailsPage : Core.BasePage
     {
-        // Locators
-        private readonly By _productTitleLocator = By.XPath("//h1[contains(@class, 'product-title')]");
-        private readonly By _productPriceLocator = By.XPath("//span[contains(@class, 'final-price')]");
-        private readonly By _productDescriptionLocator = By.XPath("//div[contains(@class, 'product-description')]");
-        private readonly By _addToCartButtonLocator = By.XPath("//button[contains(text(), 'Add to Cart')]");
-        private readonly By _addToWishlistButtonLocator = By.XPath("//button[contains(text(), 'Add to Wishlist')]");
-        private readonly By _quantitySelectorLocator = By.XPath("//input[@type='number' and contains(@class, 'quantity')]");
-        private readonly By _ratingLocator = By.XPath("//span[contains(@class, 'rating-score')]");
-        private readonly By _reviewsCountLocator = By.XPath("//span[contains(text(), 'Reviews')]");
-        private readonly By _stockStatusLocator = By.XPath("//div[contains(@class, 'stock-status')]");
+        // Locators for Sauce Demo product page
+        private readonly By _productTitleLocator = By.ClassName("inventory_item_name");
+        private readonly By _productPriceLocator = By.ClassName("inventory_item_price");
+        private readonly By _productDescriptionLocator = By.ClassName("inventory_item_desc");
+        private readonly By _addToCartButtonLocator = By.XPath("//button[contains(@class, 'btn_primary')]");
+        private readonly By _removeButtonLocator = By.XPath("//button[contains(@class, 'btn_secondary')]");
+        private readonly By _backButtonLocator = By.Id("back-to-products");
+        private readonly By _productContainerLocator = By.ClassName("inventory_details");
 
         public ProductDetailsPage(IWebDriver driver) : base(driver) { }
 
@@ -42,23 +40,13 @@ namespace TakealotAutomation.Pages
         }
 
         /// <summary>
-        /// Gets product rating
+        /// Gets product description
         /// </summary>
-        public string GetProductRating()
+        public string GetProductDescription()
         {
-            string rating = GetElementText(_ratingLocator);
-            Log.Information($"Product rating: {rating}");
-            return rating;
-        }
-
-        /// <summary>
-        /// Gets stock status
-        /// </summary>
-        public string GetStockStatus()
-        {
-            string status = GetElementText(_stockStatusLocator);
-            Log.Information($"Stock status: {status}");
-            return status;
+            string description = GetElementText(_productDescriptionLocator);
+            Log.Information($"Product description: {description}");
+            return description;
         }
 
         /// <summary>
@@ -71,21 +59,29 @@ namespace TakealotAutomation.Pages
         }
 
         /// <summary>
-        /// Adds product to wishlist
+        /// Removes product from cart (if the button shows Remove instead of Add)
         /// </summary>
-        public void AddToWishlist()
+        public void RemoveFromCart()
         {
-            Log.Information("Adding product to wishlist");
-            WaitAndClick(_addToWishlistButtonLocator);
+            Log.Information("Removing product from cart");
+            try
+            {
+                WaitAndClick(_removeButtonLocator);
+            }
+            catch
+            {
+                Log.Warning("Remove button not found");
+            }
         }
 
         /// <summary>
-        /// Sets product quantity
+        /// Goes back to products page
         /// </summary>
-        public void SetQuantity(int quantity)
+        public HomePage GoBackToProducts()
         {
-            Log.Information($"Setting quantity to: {quantity}");
-            WaitAndSendKeys(_quantitySelectorLocator, quantity.ToString());
+            Log.Information("Going back to products");
+            WaitAndClick(_backButtonLocator);
+            return new HomePage(Driver);
         }
 
         /// <summary>
@@ -93,7 +89,7 @@ namespace TakealotAutomation.Pages
         /// </summary>
         public bool IsProductDetailsPageLoaded()
         {
-            bool isLoaded = IsElementPresent(_productTitleLocator);
+            bool isLoaded = IsElementPresent(_productTitleLocator) && IsElementPresent(_productPriceLocator);
             Log.Information($"Product details page loaded: {isLoaded}");
             return isLoaded;
         }

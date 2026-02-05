@@ -4,27 +4,26 @@ using Serilog;
 namespace TakealotAutomation.Pages
 {
     /// <summary>
-    /// Page object for user login
+    /// Page object for Sauce Demo login page
     /// </summary>
     public class LoginPage : Core.BasePage
     {
-        // Locators
-        private readonly By _emailInputLocator = By.XPath("//input[@type='email']");
-        private readonly By _passwordInputLocator = By.XPath("//input[@type='password']");
-        private readonly By _loginButtonLocator = By.XPath("//button[contains(text(), 'Login')]");
-        private readonly By _forgotPasswordLinkLocator = By.XPath("//a[contains(text(), 'Forgot Password')]");
-        private readonly By _signUpLinkLocator = By.XPath("//a[contains(text(), 'Sign Up')]");
-        private readonly By _errorMessageLocator = By.XPath("//div[contains(@class, 'error-message')]");
+        // Locators for Sauce Demo
+        private readonly By _usernameInputLocator = By.Id("user-name");
+        private readonly By _passwordInputLocator = By.Id("password");
+        private readonly By _loginButtonLocator = By.Id("login-button");
+        private readonly By _errorMessageLocator = By.XPath("//h3[@data-test='error']");
+        private readonly By _loginContainerLocator = By.ClassName("login_container");
 
         public LoginPage(IWebDriver driver) : base(driver) { }
 
         /// <summary>
-        /// Logs in with email and password
+        /// Logs in with username and password
         /// </summary>
-        public HomePage Login(string email, string password)
+        public HomePage Login(string username, string password)
         {
-            Log.Information("Logging in");
-            WaitAndSendKeys(_emailInputLocator, email);
+            Log.Information($"Logging in with username: {username}");
+            WaitAndSendKeys(_usernameInputLocator, username);
             WaitAndSendKeys(_passwordInputLocator, password);
             WaitAndClick(_loginButtonLocator);
             return new HomePage(Driver);
@@ -49,30 +48,11 @@ namespace TakealotAutomation.Pages
         }
 
         /// <summary>
-        /// Navigates to forgot password
-        /// </summary>
-        public void GoToForgotPassword()
-        {
-            Log.Information("Going to forgot password");
-            WaitAndClick(_forgotPasswordLinkLocator);
-        }
-
-        /// <summary>
-        /// Navigates to sign up
-        /// </summary>
-        public SignUpPage GoToSignUp()
-        {
-            Log.Information("Going to sign up");
-            WaitAndClick(_signUpLinkLocator);
-            return new SignUpPage(Driver);
-        }
-
-        /// <summary>
         /// Verifies login page is loaded
         /// </summary>
         public bool IsLoginPageLoaded()
         {
-            bool isLoaded = IsElementPresent(_emailInputLocator) && IsElementPresent(_passwordInputLocator);
+            bool isLoaded = IsElementPresent(_usernameInputLocator) && IsElementPresent(_passwordInputLocator);
             Log.Information($"Login page loaded: {isLoaded}");
             return isLoaded;
         }

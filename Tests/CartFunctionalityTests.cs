@@ -5,22 +5,28 @@ using TakealotAutomation.Pages;
 namespace TakealotAutomation.Tests
 {
     /// <summary>
-    /// Test suite for cart functionality
+    /// Test suite for Sauce Demo cart functionality
     /// </summary>
     [TestFixture]
     public class CartFunctionalityTests : BaseTest
     {
+        private LoginPage? _loginPage;
         private HomePage? _homePage;
+        private const string ValidUsername = "standard_user";
+        private const string ValidPassword = "secret_sauce";
 
         [SetUp]
         public new void SetUp()
         {
             base.SetUp();
-            _homePage = new HomePage(Driver!);
+            _loginPage = new LoginPage(Driver!);
+            // Login before cart tests
+            _homePage = _loginPage.Login(ValidUsername, ValidPassword);
         }
 
         [Test]
-        [Category("Functional")]
+        [Category("Cart")]
+        [Category("Smoke")]
         [Description("Verify empty cart displays correctly")]
         public void VerifyEmptyCartDisplay()
         {
@@ -34,13 +40,13 @@ namespace TakealotAutomation.Tests
         }
 
         [Test]
-        [Category("Functional")]
+        [Category("Cart")]
+        [Category("Smoke")]
         [Description("Add product to cart and verify item count")]
         public void AddProductToCartAndVerify()
         {
             // Arrange
-            var searchResultsPage = _homePage!.SearchForProduct("phone");
-            var productDetailsPage = searchResultsPage.ClickFirstProduct();
+            var productDetailsPage = _homePage!.ClickFirstProduct();
 
             // Act
             productDetailsPage.AddToCart();
@@ -48,39 +54,60 @@ namespace TakealotAutomation.Tests
 
             // Assert
             Assert.That(cartPage.GetCartItemCount(), Is.GreaterThan(0), "Cart should contain items");
-            Assert.That(cartPage.GetCartTotal(), Is.Not.Empty, "Cart total should not be empty");
+            Assert.That(cartPage.GetCartItemCount(), Is.EqualTo(1), "Cart should contain exactly 1 item");
             Log.Information($"Cart contains {cartPage.GetCartItemCount()} items");
         }
 
         [Test]
-        [Category("Functional")]
-        [Description("Verify cart total calculation")]
-        public void VerifyCartTotal()
+        [Category("Cart")]
+        [Description("Add multiple products to cart")]
+        public void AddMultipleProductsToCart()
         {
-            // Arrange
-            var searchResultsPage = _homePage!.SearchForProduct("phone");
-            var productDetailsPage = searchResultsPage.ClickFirstProduct();
-            productDetailsPage.AddToCart();
+            // Arrange & Act - Add first product
+            _homePage!.AddFirstProductToCart();
+            
+            // Go back to products and add another
+            _homePage.GoToCart().ContinueShopping();
+            _homePage.ClickProductByIndex(1).AddToCart();
 
-            // Act
+            // Navigate to cart
             var cartPage = _homePage.GoToCart();
-            string cartTotal = cartPage.GetCartTotal();
 
             // Assert
-            Assert.That(cartTotal, Is.Not.Empty, "Cart total should be calculated");
-            Assert.That(cartTotal, Does.Contain("R"), "Cart total should contain currency symbol");
-            Log.Information($"Cart total verified: {cartTotal}");
+            Assert.That(cartPage.GetCartItemCount(), Is.EqualTo(2), "Cart should contain 2 items");
+            Log.Information($"Successfully added multiple products to cart");
         }
 
         [Test]
-        [Category("Functional")]
+        [Category("Cart")]
+        [Description("Remove item from cart")]
+        public void RemoveItemFromCart()
+        {
+            // Arrange - Add items to cart
+            _homePage!.AddFirstProductToCart();
+            var cartPage = _homePage.GoToCart();
+            int initialCount = cartPage.GetCartItemCount();
+
+            // Act
+            if (initialCount > 0)
+            {
+                cartPage.RemoveItemAtIndex(0);
+            }
+
+            // Assert
+            int finalCount = cartPage.GetCartItemCount();
+            Assert.That(finalCount, Is.LessThan(initialCount), "Cart item count should decrease after removal");
+            Log.Information($"Item removed from cart. Count: {initialCount} -> {finalCount}");
+        }
+
+        [Test]
+        [Category("Cart")]
+        [Category("Smoke")]
         [Description("Proceed to checkout from cart")]
         public void ProceedToCheckoutFromCart()
         {
             // Arrange
-            var searchResultsPage = _homePage!.SearchForProduct("phone");
-            var productDetailsPage = searchResultsPage.ClickFirstProduct();
-            productDetailsPage.AddToCart();
+            _homePage!.AddFirstProductToCart();
             var cartPage = _homePage.GoToCart();
 
             // Act
@@ -92,23 +119,20 @@ namespace TakealotAutomation.Tests
         }
 
         [Test]
-        [Category("Functional")]
-        [Description("Apply promo code to cart")]
-        public void ApplyPromoCodeToCart()
+        [Category("Cart")]
+        [Description("Continue shopping from cart returns to inventory")]
+        public void ContinueShoppingFromCart()
         {
             // Arrange
-            var searchResultsPage = _homePage!.SearchForProduct("phone");
-            var productDetailsPage = searchResultsPage.ClickFirstProduct();
-            productDetailsPage.AddToCart();
-            var cartPage = _homePage.GoToCart();
-            string promoCode = "SAVE10";
+            var cartPage = _homePage!.GoToCart();
 
             // Act
-            cartPage.ApplyPromoCode(promoCode);
+            var inventoryPage = cartPage.ContinueShopping();
 
             // Assert
-            Log.Information($"Promo code '{promoCode}' applied to cart");
-            // Note: Additional assertion would check for discount applied
+            Assert.That(inventoryPage.IsHomePageLoaded(), Is.True, "Should return to inventory page");
+            Assert.That(inventoryPage.GetProductCount(), Is.GreaterThan(0), "Should display products");
+            Log.Information("Continued shopping - returned to inventory");
         }
     }
 }

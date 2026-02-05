@@ -5,29 +5,32 @@ using TakealotAutomation.Pages;
 namespace TakealotAutomation.Tests
 {
     /// <summary>
-    /// Test suite for checkout and order completion
+    /// Test suite for Sauce Demo checkout and order completion
     /// </summary>
     [TestFixture]
     public class CheckoutTests : BaseTest
     {
+        private LoginPage? _loginPage;
         private HomePage? _homePage;
+        private const string ValidUsername = "standard_user";
+        private const string ValidPassword = "secret_sauce";
 
         [SetUp]
         public new void SetUp()
         {
             base.SetUp();
-            _homePage = new HomePage(Driver!);
+            _loginPage = new LoginPage(Driver!);
+            _homePage = _loginPage.Login(ValidUsername, ValidPassword);
         }
 
         [Test]
         [Category("Checkout")]
+        [Category("Smoke")]
         [Description("Verify checkout page loads with valid product")]
         public void VerifyCheckoutPageLoads()
         {
             // Arrange
-            var searchResultsPage = _homePage!.SearchForProduct("phone");
-            var productDetailsPage = searchResultsPage.ClickFirstProduct();
-            productDetailsPage.AddToCart();
+            _homePage!.AddFirstProductToCart();
             var cartPage = _homePage.GoToCart();
 
             // Act
@@ -40,80 +43,108 @@ namespace TakealotAutomation.Tests
 
         [Test]
         [Category("Checkout")]
-        [Description("Fill customer information on checkout")]
-        public void FillCustomerInformation()
+        [Description("Fill checkout information")]
+        public void FillCheckoutInformation()
         {
             // Arrange
-            var searchResultsPage = _homePage!.SearchForProduct("phone");
-            var productDetailsPage = searchResultsPage.ClickFirstProduct();
-            productDetailsPage.AddToCart();
+            _homePage!.AddFirstProductToCart();
             var cartPage = _homePage.GoToCart();
             var checkoutPage = cartPage.ProceedToCheckout();
 
             // Act
-            checkoutPage.FillCustomerInformation(
-                "customer@example.com",
-                "John",
-                "Doe",
-                "0123456789"
-            );
+            checkoutPage.FillCheckoutInformation("John", "Doe", "12345");
 
             // Assert
-            Log.Information("Customer information filled successfully");
+            Log.Information("Checkout information filled successfully");
         }
 
         [Test]
         [Category("Checkout")]
-        [Description("Fill delivery address on checkout")]
-        public void FillDeliveryAddress()
+        [Category("Smoke")]
+        [Description("Complete full checkout process and verify order")]
+        public void CompleteCheckoutProcessSuccessfully()
         {
             // Arrange
-            var searchResultsPage = _homePage!.SearchForProduct("phone");
-            var productDetailsPage = searchResultsPage.ClickFirstProduct();
-            productDetailsPage.AddToCart();
+            _homePage!.AddFirstProductToCart();
             var cartPage = _homePage.GoToCart();
             var checkoutPage = cartPage.ProceedToCheckout();
 
-            // Act
-            checkoutPage.FillDeliveryAddress(
-                "123 Main Street",
-                "Johannesburg",
-                "2000"
-            );
+            // Act - Fill checkout info
+            checkoutPage.FillCheckoutInformation("John", "Doe", "12345");
+            
+            // Continue to overview
+            checkoutPage.ContinueToOverview();
+
+            // Finish the order
+            var confirmationPage = checkoutPage.FinishOrder();
 
             // Assert
-            Log.Information("Delivery address filled successfully");
+            Assert.That(confirmationPage.IsOrderConfirmationDisplayed(), Is.True, "Order confirmation should be displayed");
+            string confirmationMessage = confirmationPage.GetConfirmationMessage();
+            Assert.That(confirmationMessage, Is.Not.Empty, "Confirmation message should not be empty");
+            Log.Information($"Order completed successfully: {confirmationMessage}");
         }
 
         [Test]
         [Category("Checkout")]
-        [Description("Complete checkout process")]
-        public void CompleteCheckoutProcess()
+        [Description("Cancel checkout and return to cart")]
+        public void CancelCheckout()
         {
             // Arrange
-            var searchResultsPage = _homePage!.SearchForProduct("phone");
-            var productDetailsPage = searchResultsPage.ClickFirstProduct();
-            productDetailsPage.AddToCart();
+            _homePage!.AddFirstProductToCart();
             var cartPage = _homePage.GoToCart();
             var checkoutPage = cartPage.ProceedToCheckout();
 
             // Act
-            checkoutPage.FillCustomerInformation(
-                "customer@example.com",
-                "John",
-                "Doe",
-                "0123456789"
-            );
-            checkoutPage.FillDeliveryAddress(
-                "123 Main Street",
-                "Johannesburg",
-                "2000"
-            );
-            checkoutPage.ContinueToPayment();
+            var returnedCartPage = checkoutPage.CancelCheckout();
 
             // Assert
-            Log.Information("Checkout process completed");
-            // Note: Payment page would have additional assertions
+            Assert.That(returnedCartPage.IsCartPageLoaded(), Is.True, "Should return to cart page");
+            Assert.That(returnedCartPage.GetCartItemCount(), Is.GreaterThan(0), "Cart should still have items");
+            Log.Information("Checkout cancelled successfully");
+        }
+
+        [Test]
+        [Category("Checkout")]
+        [Description("Checkout with missing first name displays error")]
+        public void CheckoutWithMissingFirstName()
+        {
+            // Arrange
+            _homePage!.AddFirstProductToCart();
+            var cartPage = _homePage.GoToCart();
+            var checkoutPage = cartPage.ProceedToCheckout();
+
+            // Act - Fill info without first name
+            checkoutPage.FillCheckoutInformation("", "Doe", "12345");
+            checkoutPage.ContinueToOverview();
+
+            // Assert
+            string errorMessage = checkoutPage.GetErrorMessage();
+            Assert.That(errorMessage, Is.Not.Empty, "Error message should be displayed for missing first name");
+            Assert.That(errorMessage.ToLower(), Does.Contain("first"), "Error should mention first name");
+            Log.Information($"Error message for missing first name: {errorMessage}");
+        }
+
+        [Test]
+        [Category("Checkout")]
+        [Description("After order confirmation, can return to shopping")]
+        public void ReturnToShoppingAfterConfirmation()
+        {
+            // Arrange & Act - Complete checkout
+            _homePage!.AddFirstProductToCart();
+            var cartPage = _homePage.GoToCart();
+            var checkoutPage = cartPage.ProceedToCheckout();
+            checkoutPage.FillCheckoutInformation("Jane", "Smith", "54321");
+            checkoutPage.ContinueToOverview();
+            var confirmationPage = checkoutPage.FinishOrder();
+
+            // Act - Return to shopping
+            var homePage = confirmationPage.BackToHome();
+
+            // Assert
+            Assert.That(homePage.IsHomePageLoaded(), Is.True, "Should return to inventory page");
+            Assert.That(homePage.GetProductCount(), Is.GreaterThan(0), "Should display products");
+            Log.Information("Returned to shopping from confirmation page");
         }
     }
 }

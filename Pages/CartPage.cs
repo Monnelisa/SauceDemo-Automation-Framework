@@ -1,22 +1,23 @@
 using OpenQA.Selenium;
 using Serilog;
+using System.Collections.Generic;
 
 namespace TakealotAutomation.Pages
 {
     /// <summary>
-    /// Page object for shopping cart
+    /// Page object for Sauce Demo shopping cart
     /// </summary>
     public class CartPage : Core.BasePage
     {
-        // Locators
-        private readonly By _cartItemsLocator = By.XPath("//div[contains(@class, 'cart-item')]");
-        private readonly By _cartTotalLocator = By.XPath("//span[contains(@class, 'cart-total')]");
-        private readonly By _checkoutButtonLocator = By.XPath("//button[contains(text(), 'Checkout')]");
-        private readonly By _removeItemButtonLocator = By.XPath(".//button[contains(text(), 'Remove')]");
-        private readonly By _emptyCartMessageLocator = By.XPath("//p[contains(text(), 'Your cart is empty')]");
-        private readonly By _continueShoppingButtonLocator = By.XPath("//button[contains(text(), 'Continue Shopping')]");
-        private readonly By _promoCodeInputLocator = By.XPath("//input[contains(@placeholder, 'Promo Code')]");
-        private readonly By _applyPromoButtonLocator = By.XPath("//button[contains(text(), 'Apply')]");
+        // Locators for Sauce Demo cart page
+        private readonly By _cartItemsLocator = By.ClassName("cart_item");
+        private readonly By _cartItemNameLocator = By.ClassName("inventory_item_name");
+        private readonly By _cartItemPriceLocator = By.ClassName("inventory_item_price");
+        private readonly By _removeButtonLocator = By.XPath(".//button[contains(@class, 'btn_secondary')]");
+        private readonly By _checkoutButtonLocator = By.Id("checkout");
+        private readonly By _continueShoppingButtonLocator = By.Id("continue-shopping");
+        private readonly By _cartTitleLocator = By.ClassName("title");
+        private readonly By _cartContainerLocator = By.ClassName("cart_list");
 
         public CartPage(IWebDriver driver) : base(driver) { }
 
@@ -25,19 +26,34 @@ namespace TakealotAutomation.Pages
         /// </summary>
         public int GetCartItemCount()
         {
-            int count = Driver.FindElements(_cartItemsLocator).Count;
+            var items = Driver.FindElements(_cartItemsLocator);
+            int count = items.Count;
             Log.Information($"Cart item count: {count}");
             return count;
         }
 
         /// <summary>
-        /// Gets cart total
+        /// Gets list of cart items
         /// </summary>
-        public string GetCartTotal()
+        public IList<IWebElement> GetCartItems()
         {
-            string total = GetElementText(_cartTotalLocator);
-            Log.Information($"Cart total: {total}");
-            return total;
+            var items = Driver.FindElements(_cartItemsLocator);
+            Log.Information($"Retrieved {items.Count} cart items");
+            return items;
+        }
+
+        /// <summary>
+        /// Removes item at specified index
+        /// </summary>
+        public void RemoveItemAtIndex(int index)
+        {
+            Log.Information($"Removing item at index: {index}");
+            var items = GetCartItems();
+            if (items.Count > index)
+            {
+                var removeButton = items[index].FindElement(_removeButtonLocator);
+                removeButton.Click();
+            }
         }
 
         /// <summary>
@@ -51,37 +67,13 @@ namespace TakealotAutomation.Pages
         }
 
         /// <summary>
-        /// Removes an item from cart
+        /// Continues shopping (goes back to inventory)
         /// </summary>
-        public void RemoveItemFromCart(int itemIndex)
+        public HomePage ContinueShopping()
         {
-            Log.Information($"Removing item at index: {itemIndex}");
-            var items = Driver.FindElements(_cartItemsLocator);
-            if (items.Count > itemIndex)
-            {
-                var removeButton = items[itemIndex].FindElement(_removeItemButtonLocator);
-                removeButton.Click();
-            }
-        }
-
-        /// <summary>
-        /// Applies promo code
-        /// </summary>
-        public void ApplyPromoCode(string promoCode)
-        {
-            Log.Information($"Applying promo code: {promoCode}");
-            WaitAndSendKeys(_promoCodeInputLocator, promoCode);
-            WaitAndClick(_applyPromoButtonLocator);
-        }
-
-        /// <summary>
-        /// Checks if cart is empty
-        /// </summary>
-        public bool IsCartEmpty()
-        {
-            bool isEmpty = IsElementPresent(_emptyCartMessageLocator);
-            Log.Information($"Cart is empty: {isEmpty}");
-            return isEmpty;
+            Log.Information("Continuing shopping");
+            WaitAndClick(_continueShoppingButtonLocator);
+            return new HomePage(Driver);
         }
 
         /// <summary>
@@ -89,7 +81,7 @@ namespace TakealotAutomation.Pages
         /// </summary>
         public bool IsCartPageLoaded()
         {
-            bool isLoaded = IsElementPresent(_cartTotalLocator) || IsElementPresent(_emptyCartMessageLocator);
+            bool isLoaded = IsElementPresent(_checkoutButtonLocator) || IsElementPresent(_continueShoppingButtonLocator);
             Log.Information($"Cart page loaded: {isLoaded}");
             return isLoaded;
         }

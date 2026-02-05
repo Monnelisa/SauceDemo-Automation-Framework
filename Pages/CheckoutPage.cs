@@ -4,64 +4,75 @@ using Serilog;
 namespace TakealotAutomation.Pages
 {
     /// <summary>
-    /// Page object for checkout process
+    /// Page object for Sauce Demo checkout process
     /// </summary>
     public class CheckoutPage : Core.BasePage
     {
-        // Locators
-        private readonly By _emailInputLocator = By.XPath("//input[@type='email']");
-        private readonly By _firstNameInputLocator = By.XPath("//input[@placeholder='First Name']");
-        private readonly By _lastNameInputLocator = By.XPath("//input[@placeholder='Last Name']");
-        private readonly By _addressInputLocator = By.XPath("//input[@placeholder='Address']");
-        private readonly By _cityInputLocator = By.XPath("//input[@placeholder='City']");
-        private readonly By _postalCodeInputLocator = By.XPath("//input[@placeholder='Postal Code']");
-        private readonly By _phoneInputLocator = By.XPath("//input[@type='tel']");
-        private readonly By _continueButtonLocator = By.XPath("//button[contains(text(), 'Continue')]");
-        private readonly By _placeOrderButtonLocator = By.XPath("//button[contains(text(), 'Place Order')]");
-        private readonly By _orderSummaryLocator = By.XPath("//div[contains(@class, 'order-summary')]");
+        // Locators for Sauce Demo checkout
+        private readonly By _firstNameInputLocator = By.Id("first-name");
+        private readonly By _lastNameInputLocator = By.Id("last-name");
+        private readonly By _postalCodeInputLocator = By.Id("postal-code");
+        private readonly By _continueButtonLocator = By.Id("continue");
+        private readonly By _finishButtonLocator = By.Id("finish");
+        private readonly By _cancelButtonLocator = By.Id("cancel");
+        private readonly By _checkoutTitleLocator = By.ClassName("title");
+        private readonly By _errorMessageLocator = By.XPath("//h3[@data-test='error']");
 
         public CheckoutPage(IWebDriver driver) : base(driver) { }
 
         /// <summary>
-        /// Fills in customer information
+        /// Fills in checkout information
         /// </summary>
-        public void FillCustomerInformation(string email, string firstName, string lastName, string phone)
+        public void FillCheckoutInformation(string firstName, string lastName, string postalCode)
         {
-            Log.Information("Filling customer information");
-            WaitAndSendKeys(_emailInputLocator, email);
+            Log.Information("Filling checkout information");
             WaitAndSendKeys(_firstNameInputLocator, firstName);
             WaitAndSendKeys(_lastNameInputLocator, lastName);
-            WaitAndSendKeys(_phoneInputLocator, phone);
-        }
-
-        /// <summary>
-        /// Fills in delivery address
-        /// </summary>
-        public void FillDeliveryAddress(string address, string city, string postalCode)
-        {
-            Log.Information("Filling delivery address");
-            WaitAndSendKeys(_addressInputLocator, address);
-            WaitAndSendKeys(_cityInputLocator, city);
             WaitAndSendKeys(_postalCodeInputLocator, postalCode);
         }
 
         /// <summary>
-        /// Proceeds to payment step
+        /// Continues to next step (cart overview)
         /// </summary>
-        public void ContinueToPayment()
+        public void ContinueToOverview()
         {
-            Log.Information("Continuing to payment");
+            Log.Information("Continuing to overview");
             WaitAndClick(_continueButtonLocator);
         }
 
         /// <summary>
-        /// Places order
+        /// Finishes the order
         /// </summary>
-        public OrderConfirmationPage PlaceOrder()
+        public OrderConfirmationPage FinishOrder()
         {
-            Log.Information("Placing order");
-            WaitAndClick(_placeOrderButtonLocator);
+            Log.Information("Finishing order");
+            WaitAndClick(_finishButtonLocator);
             return new OrderConfirmationPage(Driver);
+        }
+
+        /// <summary>
+        /// Cancels checkout
+        /// </summary>
+        public CartPage CancelCheckout()
+        {
+            Log.Information("Canceling checkout");
+            WaitAndClick(_cancelButtonLocator);
+            return new CartPage(Driver);
+        }
+
+        /// <summary>
+        /// Gets error message if present
+        /// </summary>
+        public string GetErrorMessage()
+        {
+            try
+            {
+                return GetElementText(_errorMessageLocator);
+            }
+            catch
+            {
+                return "";
+            }
         }
 
         /// <summary>
@@ -69,7 +80,9 @@ namespace TakealotAutomation.Pages
         /// </summary>
         public bool IsCheckoutPageLoaded()
         {
-            bool isLoaded = IsElementPresent(_emailInputLocator);
+            bool isLoaded = IsElementPresent(_firstNameInputLocator) && 
+                           IsElementPresent(_lastNameInputLocator) && 
+                           IsElementPresent(_postalCodeInputLocator);
             Log.Information($"Checkout page loaded: {isLoaded}");
             return isLoaded;
         }
