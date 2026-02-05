@@ -12,6 +12,7 @@ namespace TakealotAutomation.Tests
     /// Base test class with setup and teardown logic
     /// </summary>
     [TestFixture]
+    [NonParallelizable]
     public abstract class BaseTest
     {
         protected IWebDriver? Driver { get; set; }
@@ -27,6 +28,7 @@ namespace TakealotAutomation.Tests
                 .CreateLogger();
 
             Log.Information("Test Suite Started");
+
         }
 
         [SetUp]
@@ -50,6 +52,7 @@ namespace TakealotAutomation.Tests
             }
 
             DriverFactory.QuitDriver(Driver!);
+            Driver = null;
         }
 
         [OneTimeTearDown]
@@ -66,6 +69,12 @@ namespace TakealotAutomation.Tests
         {
             try
             {
+                if (Driver == null)
+                {
+                    Log.Warning("Screenshot skipped because WebDriver is not initialized");
+                    return;
+                }
+
                 var screenshotDirectory = ConfigurationManager.GetScreenshotPath();
                 if (!Directory.Exists(screenshotDirectory))
                 {
@@ -73,7 +82,7 @@ namespace TakealotAutomation.Tests
                 }
 
                 var screenshotPath = Path.Combine(screenshotDirectory, $"{screenshotName}_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.png");
-                var screenshot = ((ITakesScreenshot)Driver!).GetScreenshot();
+                var screenshot = ((ITakesScreenshot)Driver).GetScreenshot();
                 screenshot.SaveAsFile(screenshotPath);
                 Log.Information($"Screenshot saved: {screenshotPath}");
             }

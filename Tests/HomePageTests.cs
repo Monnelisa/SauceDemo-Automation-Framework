@@ -16,9 +16,8 @@ namespace TakealotAutomation.Tests
         private const string ValidPassword = "secret_sauce";
 
         [SetUp]
-        public new void SetUp()
+        public void SetUp()
         {
-            base.SetUp();
             _loginPage = new LoginPage(Driver!);
             _homePage = _loginPage.Login(ValidUsername, ValidPassword);
         }

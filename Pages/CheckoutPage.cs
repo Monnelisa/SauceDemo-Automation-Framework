@@ -65,14 +65,11 @@ namespace TakealotAutomation.Pages
         /// </summary>
         public string GetErrorMessage()
         {
-            try
+            if (IsElementPresent(_errorMessageLocator))
             {
                 return GetElementText(_errorMessageLocator);
             }
-            catch
-            {
-                return "";
-            }
+            return "";
         }
 
         /// <summary>

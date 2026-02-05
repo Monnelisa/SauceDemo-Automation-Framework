@@ -20,16 +20,9 @@ namespace TakealotAutomation.Pages
         /// </summary>
         public string GetConfirmationMessage()
         {
-            try
-            {
-                string message = GetElementText(_confirmationMessageLocator);
-                Log.Information($"Confirmation message: {message}");
-                return message;
-            }
-            catch
-            {
-                return "";
-            }
+            string message = GetElementText(_confirmationMessageLocator);
+            Log.Information($"Confirmation message: {message}");
+            return message;
         }
 
         /// <summary>
@@ -37,16 +30,9 @@ namespace TakealotAutomation.Pages
         /// </summary>
         public string GetConfirmationText()
         {
-            try
-            {
-                string text = GetElementText(_confirmationTextLocator);
-                Log.Information($"Confirmation text: {text}");
-                return text;
-            }
-            catch
-            {
-                return "";
-            }
+            string text = GetElementText(_confirmationTextLocator);
+            Log.Information($"Confirmation text: {text}");
+            return text;
         }
 
         /// <summary>

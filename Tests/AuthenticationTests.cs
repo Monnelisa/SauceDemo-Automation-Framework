@@ -20,9 +20,8 @@ namespace TakealotAutomation.Tests
         private const string InvalidPassword = "wrong_password";
 
         [SetUp]
-        public new void SetUp()
+        public void SetUp()
         {
-            base.SetUp();
             _loginPage = new LoginPage(Driver!);
         }
 
