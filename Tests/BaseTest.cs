@@ -2,6 +2,7 @@ using NUnit.Framework;
 using OpenQA.Selenium;
 using Serilog;
 using System;
+using System.IO;
 using TakealotAutomation.Configuration;
 using TakealotAutomation.Core;
 

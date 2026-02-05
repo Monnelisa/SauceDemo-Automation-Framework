@@ -1,8 +1,10 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Support.UI;
 using Serilog;
 using System;
+using TakealotAutomation.Configuration;
+using WebDriverManager;
+using WebDriverManager.DriverConfigs.Impl;
 
 namespace TakealotAutomation.Core
 {
@@ -29,6 +31,8 @@ namespace TakealotAutomation.Core
 
         private static IWebDriver InitializeChromeDriver()
         {
+            new DriverManager().SetUpDriver(new ChromeConfig());
+
             var options = new ChromeOptions();
             options.AddArgument("--start-maximized");
             options.AddArgument("--disable-notifications");

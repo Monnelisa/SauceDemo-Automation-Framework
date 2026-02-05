@@ -46,13 +46,8 @@ namespace TakealotAutomation.Pages
         public ProductDetailsPage ClickFirstProduct()
         {
             Log.Information("Clicking first product");
-            var products = GetProductItems();
-            if (products.Count > 0)
-            {
-                products[0].Click();
-                return new ProductDetailsPage(Driver);
-            }
-            throw new NoSuchElementException("No products found");
+            WaitAndClick(_productItemsLocator);
+            return new ProductDetailsPage(Driver);
         }
 
         /// <summary>
@@ -73,6 +68,23 @@ namespace TakealotAutomation.Pages
             bool resultsVisible = IsElementPresent(_productItemsLocator);
             Log.Information($"Search results displayed: {resultsVisible}");
             return resultsVisible;
+        }
+
+        /// <summary>
+        /// Alias used by tests for clarity
+        /// </summary>
+        public bool IsSearchResultsDisplayed() => AreSearchResultsDisplayed();
+
+        /// <summary>
+        /// Alias to indicate the page is loaded; checks header or results
+        /// </summary>
+        public bool IsSearchResultsPageLoaded()
+        {
+            bool headerPresent = IsElementPresent(_searchResultsHeaderLocator);
+            bool resultsPresent = AreSearchResultsDisplayed();
+            bool loaded = headerPresent || resultsPresent;
+            Log.Information($"Search results page loaded: {loaded}");
+            return loaded;
         }
 
         /// <summary>

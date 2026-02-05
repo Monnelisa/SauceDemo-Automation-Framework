@@ -1,3 +1,4 @@
+using System;
 using NUnit.Framework;
 using Serilog;
 using TakealotAutomation.Pages;

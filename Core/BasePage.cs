@@ -2,6 +2,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using Serilog;
 using System;
+using TakealotAutomation.Configuration;     
 
 namespace TakealotAutomation.Core
 {
@@ -26,7 +27,24 @@ namespace TakealotAutomation.Core
         {
             try
             {
-                var element = Wait.Until(ExpectedConditions.ElementIsVisible(locator));
+                var element = Wait.Until(driver =>
+                {
+                    try
+                    {
+                        var el = driver.FindElement(locator);
+                        return el.Displayed ? el : null;
+                    }
+                    catch (NoSuchElementException)
+                    {
+                        return null;
+                    }
+                });
+
+                if (element == null)
+                {
+                    throw new WebDriverTimeoutException($"Element not visible: {locator}");
+                }
+
                 Log.Information($"Element found: {locator}");
                 return element;
             }
@@ -44,7 +62,24 @@ namespace TakealotAutomation.Core
         {
             try
             {
-                var element = Wait.Until(ExpectedConditions.ElementToBeClickable(locator));
+                var element = Wait.Until(driver =>
+                {
+                    try
+                    {
+                        var el = driver.FindElement(locator);
+                        return (el.Displayed && el.Enabled) ? el : null;
+                    }
+                    catch (NoSuchElementException)
+                    {
+                        return null;
+                    }
+                });
+
+                if (element == null)
+                {
+                    throw new WebDriverTimeoutException($"Element not clickable: {locator}");
+                }
+
                 element.Click();
                 Log.Information($"Clicked element: {locator}");
             }
@@ -134,7 +169,7 @@ namespace TakealotAutomation.Core
         {
             try
             {
-                Wait.Until(ExpectedConditions.TitleContains(title));
+                Wait.Until(driver => driver.Title != null && driver.Title.Contains(title));
                 Log.Information($"Page title verified: {title}");
             }
             catch (Exception ex)
