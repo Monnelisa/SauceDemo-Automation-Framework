@@ -1,5 +1,6 @@
 using OpenQA.Selenium;
 using Serilog;
+using System;
 
 namespace TakealotAutomation.Pages
 {
@@ -89,9 +90,19 @@ namespace TakealotAutomation.Pages
         /// </summary>
         public bool IsProductDetailsPageLoaded()
         {
-            bool isLoaded = IsElementPresent(_productTitleLocator) && IsElementPresent(_productPriceLocator);
-            Log.Information($"Product details page loaded: {isLoaded}");
-            return isLoaded;
+            try
+            {
+                WaitForElementToBeVisible(_productContainerLocator);
+                WaitForElementToBeVisible(_productTitleLocator);
+                WaitForElementToBeVisible(_productPriceLocator);
+                Log.Information("Product details page loaded: true");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.Warning($"Product details page loaded: false - {ex.Message}");
+                return false;
+            }
         }
     }
 }

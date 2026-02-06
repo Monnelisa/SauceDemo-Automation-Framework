@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using Moq;
 using Serilog;
 using TakealotAutomation.Pages;
 
@@ -119,6 +120,131 @@ namespace TakealotAutomation.Tests
             // Assert
             Assert.That(updatedCount, Is.GreaterThan(initialCount), "Cart count should increase after adding item");
             Log.Information($"Cart count updated: {initialCount} -> {updatedCount}");
+        }
+    }
+
+    /// <summary>
+    /// Unit tests for HomePageTests.ClickProductAndVerifyDetailsPage
+    /// </summary>
+    [TestFixture]
+    public class HomePageTestsTest
+    {
+        private Mock<HomePage> _mockHomePage;
+        private Mock<ProductDetailsPage> _mockProductDetailsPage;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _mockHomePage = new Mock<HomePage>();
+            _mockProductDetailsPage = new Mock<ProductDetailsPage>();
+        }
+
+        [Test]
+        [Category("Unit")]
+        [Description("Verify product details page loads successfully after clicking product")]
+        public void ClickFirstProduct_ShouldReturnProductDetailsPage()
+        {
+            // Arrange
+            _mockHomePage.Setup(h => h.ClickFirstProduct()).Returns(_mockProductDetailsPage.Object);
+            _mockProductDetailsPage.Setup(p => p.IsProductDetailsPageLoaded()).Returns(true);
+
+            // Act
+            var result = _mockHomePage.Object.ClickFirstProduct();
+
+            // Assert
+            Assert.That(result.IsProductDetailsPageLoaded(), Is.True);
+            _mockHomePage.Verify(h => h.ClickFirstProduct(), Times.Once);
+        }
+
+        [Test]
+        [Category("Unit")]
+        [Description("Verify product title is populated on details page")]
+        public void ClickFirstProduct_ShouldPopulateProductTitle()
+        {
+            // Arrange
+            const string expectedTitle = "Sauce Labs Backpack";
+            _mockHomePage.Setup(h => h.ClickFirstProduct()).Returns(_mockProductDetailsPage.Object);
+            _mockProductDetailsPage.Setup(p => p.GetProductTitle()).Returns(expectedTitle);
+
+            // Act
+            var result = _mockHomePage.Object.ClickFirstProduct();
+            string actualTitle = result.GetProductTitle();
+
+            // Assert
+            Assert.That(actualTitle, Is.Not.Empty);
+            Assert.That(actualTitle, Is.EqualTo(expectedTitle));
+        }
+
+        [Test]
+        [Category("Unit")]
+        [Description("Verify product price is populated on details page")]
+        public void ClickFirstProduct_ShouldPopulateProductPrice()
+        {
+            // Arrange
+            const string expectedPrice = "$29.99";
+            _mockHomePage.Setup(h => h.ClickFirstProduct()).Returns(_mockProductDetailsPage.Object);
+            _mockProductDetailsPage.Setup(p => p.GetProductPrice()).Returns(expectedPrice);
+
+            // Act
+            var result = _mockHomePage.Object.ClickFirstProduct();
+            string actualPrice = result.GetProductPrice();
+
+            // Assert
+            Assert.That(actualPrice, Is.Not.Empty);
+            Assert.That(actualPrice, Is.EqualTo(expectedPrice));
+        }
+
+        [Test]
+        [Category("Unit")]
+        [Description("Verify both title and price are not empty simultaneously")]
+        public void ClickFirstProduct_ShouldHaveBothTitleAndPrice()
+        {
+            // Arrange
+            _mockHomePage.Setup(h => h.ClickFirstProduct()).Returns(_mockProductDetailsPage.Object);
+            _mockProductDetailsPage.Setup(p => p.GetProductTitle()).Returns("Test Product");
+            _mockProductDetailsPage.Setup(p => p.GetProductPrice()).Returns("$19.99");
+            _mockProductDetailsPage.Setup(p => p.IsProductDetailsPageLoaded()).Returns(true);
+
+            // Act
+            var result = _mockHomePage.Object.ClickFirstProduct();
+
+            // Assert
+            Assert.That(result.IsProductDetailsPageLoaded(), Is.True);
+            Assert.That(result.GetProductTitle(), Is.Not.Empty);
+            Assert.That(result.GetProductPrice(), Is.Not.Empty);
+        }
+
+        [Test]
+        [Category("Unit")]
+        [Description("Verify null title throws appropriate assertion")]
+        public void ClickFirstProduct_WithNullTitle_ShouldFailAssertion()
+        {
+            // Arrange
+            _mockHomePage.Setup(h => h.ClickFirstProduct()).Returns(_mockProductDetailsPage.Object);
+            _mockProductDetailsPage.Setup(p => p.GetProductTitle()).Returns(string.Empty);
+            _mockProductDetailsPage.Setup(p => p.IsProductDetailsPageLoaded()).Returns(true);
+
+            // Act
+            var result = _mockHomePage.Object.ClickFirstProduct();
+
+            // Assert
+            Assert.That(result.GetProductTitle(), Is.Empty);
+        }
+
+        [Test]
+        [Category("Unit")]
+        [Description("Verify page load failure is detected")]
+        public void ClickFirstProduct_WhenPageNotLoaded_ShouldDetectFailure()
+        {
+            // Arrange
+            _mockHomePage.Setup(h => h.ClickFirstProduct()).Returns(_mockProductDetailsPage.Object);
+            _mockProductDetailsPage.Setup(p => p.IsProductDetailsPageLoaded()).Returns(false);
+
+            // Act
+            var result = _mockHomePage.Object.ClickFirstProduct();
+
+            // Assert
+            Assert.That(result.IsProductDetailsPageLoaded(), Is.False);
         }
     }
 }
