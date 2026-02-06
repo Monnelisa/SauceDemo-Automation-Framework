@@ -49,11 +49,7 @@ namespace TakealotAutomation.Pages
         public ProductDetailsPage ClickFirstProduct()
         {
             Log.Information("Clicking first product");
-            var products = GetProductItems();
-            if (products.Count > 0)
-            {
-                products[0].FindElement(_productNameLocator).Click();
-            }
+            WaitAndClick(_productNameLocator);
             return new ProductDetailsPage(Driver);
         }
 
