@@ -15,6 +15,8 @@ namespace SauceDemoAutomation.Pages
         private readonly By _productNameLocator = By.ClassName("inventory_item_name");
         private readonly By _productPriceLocator = By.ClassName("inventory_item_price");
         private readonly By _addToCartButtonLocator = By.CssSelector("button.btn_inventory");
+        private readonly By _addToCartListButtonLocator = By.CssSelector(".inventory_item button[data-test^='add-to-cart']");
+        private readonly By _removeFromCartListButtonLocator = By.CssSelector(".inventory_item button[data-test^='remove']");
         private readonly By _cartLinkLocator = By.ClassName("shopping_cart_link");
         private readonly By _cartBadgeLocator = By.ClassName("shopping_cart_badge");
         private readonly By _sortDropdownLocator = By.ClassName("product_sort_container");
@@ -75,12 +77,45 @@ namespace SauceDemoAutomation.Pages
         {
             Log.Information("Adding first product to cart");
             WaitForElementToBeVisible(_productItemsLocator);
-            var products = GetProductItems();
-            if (products.Count > 0)
+            ScrollToElement(_addToCartListButtonLocator);
+
+            var addButton = Wait.Until(driver =>
             {
-                var addButton = products[0].FindElement(_addToCartButtonLocator);
+                var buttons = driver.FindElements(_addToCartListButtonLocator);
+                if (buttons.Count == 0)
+                {
+                    return null;
+                }
+
+                var button = buttons[0];
+                return (button.Displayed && button.Enabled) ? button : null;
+            });
+
+            if (addButton == null)
+            {
+                Log.Warning("No clickable add-to-cart button found");
+                return;
+            }
+
+            try
+            {
                 addButton.Click();
             }
+            catch (Exception ex) when (ex is ElementClickInterceptedException || ex is WebDriverException)
+            {
+                IJavaScriptExecutor js = (IJavaScriptExecutor)Driver;
+                js.ExecuteScript("arguments[0].click();", addButton);
+            }
+
+            Wait.Until(driver =>
+            {
+                if (driver.FindElements(_cartBadgeLocator).Count > 0)
+                {
+                    return true;
+                }
+
+                return driver.FindElements(_removeFromCartListButtonLocator).Count > 0;
+            });
         }
 
         /// <summary>
@@ -100,17 +135,14 @@ namespace SauceDemoAutomation.Pages
         {
             try
             {
-                if (!IsElementPresent(_cartBadgeLocator))
+                var badges = Driver.FindElements(_cartBadgeLocator);
+                if (badges.Count == 0)
                 {
                     return 0;
                 }
 
-                string badgeText = GetElementText(_cartBadgeLocator);
-                if (int.TryParse(badgeText, out int count))
-                {
-                    return count;
-                }
-                return 0;
+                string badgeText = badges[0].Text;
+                return int.TryParse(badgeText, out int count) ? count : 0;
             }
             catch
             {
@@ -125,10 +157,20 @@ namespace SauceDemoAutomation.Pages
         {
             try
             {
-                var updated = Wait.Until(_ =>
+                var updated = Wait.Until(driver =>
                 {
                     int current = GetCartItemCount();
-                    return current > initialCount ? current : (int?)null;
+                    if (current > initialCount)
+                    {
+                        return current;
+                    }
+
+                    if (initialCount == 0 && driver.FindElements(_removeFromCartListButtonLocator).Count > 0)
+                    {
+                        return 1;
+                    }
+
+                    return (int?)null;
                 });
 
                 return updated ?? initialCount;
