@@ -23,7 +23,7 @@ namespace TakealotAutomation.Pages
         /// <summary>
         /// Gets product title
         /// </summary>
-        public string GetProductTitle()
+        public virtual string GetProductTitle()
         {
             string title = GetElementText(_productTitleLocator);
             Log.Information($"Product title: {title}");
@@ -33,7 +33,7 @@ namespace TakealotAutomation.Pages
         /// <summary>
         /// Gets product price
         /// </summary>
-        public string GetProductPrice()
+        public virtual string GetProductPrice()
         {
             string price = GetElementText(_productPriceLocator);
             Log.Information($"Product price: {price}");
@@ -88,7 +88,7 @@ namespace TakealotAutomation.Pages
         /// <summary>
         /// Verifies product details page is loaded
         /// </summary>
-        public bool IsProductDetailsPageLoaded()
+        public virtual bool IsProductDetailsPageLoaded()
         {
             try
             {

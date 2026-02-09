@@ -1,5 +1,6 @@
 using OpenQA.Selenium;
 using Serilog;
+using System;
 using System.Collections.Generic;
 
 namespace TakealotAutomation.Pages
@@ -13,7 +14,7 @@ namespace TakealotAutomation.Pages
         private readonly By _productItemsLocator = By.ClassName("inventory_item");
         private readonly By _productNameLocator = By.ClassName("inventory_item_name");
         private readonly By _productPriceLocator = By.ClassName("inventory_item_price");
-        private readonly By _addToCartButtonLocator = By.XPath("//button[contains(@class, 'btn_primary')]");
+        private readonly By _addToCartButtonLocator = By.CssSelector("button.btn_inventory");
         private readonly By _cartLinkLocator = By.ClassName("shopping_cart_link");
         private readonly By _cartBadgeLocator = By.ClassName("shopping_cart_badge");
         private readonly By _sortDropdownLocator = By.ClassName("product_sort_container");
@@ -46,7 +47,7 @@ namespace TakealotAutomation.Pages
         /// <summary>
         /// Clicks on first product to view details
         /// </summary>
-        public ProductDetailsPage ClickFirstProduct()
+        public virtual ProductDetailsPage ClickFirstProduct()
         {
             Log.Information("Clicking first product");
             WaitAndClick(_productNameLocator);
@@ -73,6 +74,7 @@ namespace TakealotAutomation.Pages
         public void AddFirstProductToCart()
         {
             Log.Information("Adding first product to cart");
+            WaitForElementToBeVisible(_productItemsLocator);
             var products = GetProductItems();
             if (products.Count > 0)
             {
@@ -98,6 +100,11 @@ namespace TakealotAutomation.Pages
         {
             try
             {
+                if (!IsElementPresent(_cartBadgeLocator))
+                {
+                    return 0;
+                }
+
                 string badgeText = GetElementText(_cartBadgeLocator);
                 if (int.TryParse(badgeText, out int count))
                 {
@@ -108,6 +115,27 @@ namespace TakealotAutomation.Pages
             catch
             {
                 return 0;
+            }
+        }
+
+        /// <summary>
+        /// Waits for cart badge count to increase from a given value
+        /// </summary>
+        public int WaitForCartCountToIncrease(int initialCount)
+        {
+            try
+            {
+                var updated = Wait.Until(_ =>
+                {
+                    int current = GetCartItemCount();
+                    return current > initialCount ? current : (int?)null;
+                });
+
+                return updated ?? initialCount;
+            }
+            catch
+            {
+                return GetCartItemCount();
             }
         }
 
@@ -138,9 +166,17 @@ namespace TakealotAutomation.Pages
         /// </summary>
         public bool IsHomePageLoaded()
         {
-            bool isLoaded = IsElementPresent(_productItemsLocator);
-            Log.Information($"Home page loaded: {isLoaded}");
-            return isLoaded;
+            try
+            {
+                WaitForElementToBeVisible(_productItemsLocator);
+                Log.Information("Home page loaded: true");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Log.Warning($"Home page loaded: false - {ex.Message}");
+                return false;
+            }
         }
 
         /// <summary>

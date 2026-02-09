@@ -115,7 +115,7 @@ namespace TakealotAutomation.Tests
 
             // Act
             _homePage.AddFirstProductToCart();
-            int updatedCount = _homePage.GetCartItemCount();
+            int updatedCount = _homePage.WaitForCartCountToIncrease(initialCount);
 
             // Assert
             Assert.That(updatedCount, Is.GreaterThan(initialCount), "Cart count should increase after adding item");
@@ -131,12 +131,14 @@ namespace TakealotAutomation.Tests
     {
         private Mock<HomePage> _mockHomePage;
         private Mock<ProductDetailsPage> _mockProductDetailsPage;
+        private Mock<OpenQA.Selenium.IWebDriver> _mockDriver;
 
         [SetUp]
         public void SetUp()
         {
-            _mockHomePage = new Mock<HomePage>();
-            _mockProductDetailsPage = new Mock<ProductDetailsPage>();
+            _mockDriver = new Mock<OpenQA.Selenium.IWebDriver>();
+            _mockHomePage = new Mock<HomePage>(_mockDriver.Object);
+            _mockProductDetailsPage = new Mock<ProductDetailsPage>(_mockDriver.Object);
         }
 
         [Test]
