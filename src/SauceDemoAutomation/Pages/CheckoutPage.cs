@@ -37,7 +37,7 @@ namespace SauceDemoAutomation.Pages
         public void ContinueToOverview()
         {
             Log.Information("Continuing to overview");
-            WaitAndClick(_continueButtonLocator);
+            WaitAndClickWithScroll(_continueButtonLocator);
         }
 
         /// <summary>
@@ -46,7 +46,7 @@ namespace SauceDemoAutomation.Pages
         public OrderConfirmationPage FinishOrder()
         {
             Log.Information("Finishing order");
-            WaitAndClick(_finishButtonLocator);
+            WaitAndClickWithScroll(_finishButtonLocator);
             return new OrderConfirmationPage(Driver);
         }
 
@@ -56,7 +56,7 @@ namespace SauceDemoAutomation.Pages
         public CartPage CancelCheckout()
         {
             Log.Information("Canceling checkout");
-            WaitAndClick(_cancelButtonLocator);
+            WaitAndClickWithScroll(_cancelButtonLocator);
             return new CartPage(Driver);
         }
 

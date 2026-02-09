@@ -62,7 +62,7 @@ namespace SauceDemoAutomation.Pages
         public CheckoutPage ProceedToCheckout()
         {
             Log.Information("Proceeding to checkout");
-            WaitAndClick(_checkoutButtonLocator);
+            WaitAndClickWithScroll(_checkoutButtonLocator);
             return new CheckoutPage(Driver);
         }
 

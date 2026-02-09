@@ -91,6 +91,41 @@ namespace SauceDemoAutomation.Core
         }
 
         /// <summary>
+        /// Scrolls to an element and clicks it with JS fallback on timeout or interception
+        /// </summary>
+        protected void WaitAndClickWithScroll(By locator)
+        {
+            try
+            {
+                ScrollToElement(locator);
+            }
+            catch (Exception ex)
+            {
+                Log.Warning($"Scroll failed for element: {locator} - {ex.Message}");
+            }
+
+            try
+            {
+                WaitAndClick(locator);
+            }
+            catch (Exception ex) when (ex is WebDriverTimeoutException || ex is ElementClickInterceptedException || ex is WebDriverException)
+            {
+                try
+                {
+                    var element = Driver.FindElement(locator);
+                    IJavaScriptExecutor jsExecutor = (IJavaScriptExecutor)Driver;
+                    jsExecutor.ExecuteScript("arguments[0].click();", element);
+                    Log.Information($"Clicked element with JS fallback: {locator}");
+                }
+                catch (Exception jsEx)
+                {
+                    Log.Error($"Error clicking element with JS fallback: {locator} - {jsEx.Message}");
+                    throw;
+                }
+            }
+        }
+
+        /// <summary>
         /// Sends keys to an element after waiting for it to be visible
         /// </summary>
         protected void WaitAndSendKeys(By locator, string text)

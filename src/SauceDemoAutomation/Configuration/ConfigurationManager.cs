@@ -30,20 +30,30 @@ namespace SauceDemoAutomation.Configuration
             return _configuration;
         }
 
-        public static string GetBaseUrl() => GetConfiguration()["AppSettings:BaseUrl"] ?? "https://www.saucedemo.com";
+        private static string? GetEnv(string key) => Environment.GetEnvironmentVariable(key);
 
-        public static string GetBrowserType() => GetConfiguration()["AppSettings:BrowserType"] ?? "Chrome";
+        public static string GetBaseUrl()
+            => GetEnv("APPSETTINGS__BASEURL") ?? GetConfiguration()["AppSettings:BaseUrl"] ?? "https://www.saucedemo.com";
 
-        public static int GetImplicitWait() => int.Parse(GetConfiguration()["AppSettings:ImplicitWait"] ?? "10");
+        public static string GetBrowserType()
+            => GetEnv("APPSETTINGS__BROWSERTYPE") ?? GetConfiguration()["AppSettings:BrowserType"] ?? "Chrome";
 
-        public static int GetExplicitWait() => int.Parse(GetConfiguration()["AppSettings:ExplicitWait"] ?? "15");
+        public static int GetImplicitWait()
+            => int.Parse(GetEnv("APPSETTINGS__IMPLICITWAIT") ?? GetConfiguration()["AppSettings:ImplicitWait"] ?? "10");
 
-        public static int GetPageLoadTimeout() => int.Parse(GetConfiguration()["AppSettings:PageLoadTimeout"] ?? "30");
+        public static int GetExplicitWait()
+            => int.Parse(GetEnv("APPSETTINGS__EXPLICITWAIT") ?? GetConfiguration()["AppSettings:ExplicitWait"] ?? "15");
 
-        public static bool IsHeadlessMode() => bool.Parse(GetConfiguration()["AppSettings:HeadlessMode"] ?? "false");
+        public static int GetPageLoadTimeout()
+            => int.Parse(GetEnv("APPSETTINGS__PAGELOADTIMEOUT") ?? GetConfiguration()["AppSettings:PageLoadTimeout"] ?? "30");
 
-        public static string GetScreenshotPath() => GetConfiguration()["AppSettings:ScreenshotPath"] ?? "Screenshots";
+        public static bool IsHeadlessMode()
+            => bool.Parse(GetEnv("APPSETTINGS__HEADLESSMODE") ?? GetConfiguration()["AppSettings:HeadlessMode"] ?? "false");
 
-        public static string GetLogPath() => GetConfiguration()["AppSettings:LogPath"] ?? "Logs";
+        public static string GetScreenshotPath()
+            => GetEnv("APPSETTINGS__SCREENSHOTPATH") ?? GetConfiguration()["AppSettings:ScreenshotPath"] ?? "Screenshots";
+
+        public static string GetLogPath()
+            => GetEnv("APPSETTINGS__LOGPATH") ?? GetConfiguration()["AppSettings:LogPath"] ?? "Logs";
     }
 }

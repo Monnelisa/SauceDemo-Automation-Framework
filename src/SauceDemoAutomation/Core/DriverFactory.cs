@@ -59,6 +59,13 @@ namespace SauceDemoAutomation.Core
             if (ConfigurationManager.IsHeadlessMode())
             {
                 options.AddArgument("--headless=new");
+                options.AddArgument("--window-size=1920,1080");
+            }
+
+            if (Environment.GetEnvironmentVariable("CI") == "true")
+            {
+                options.AddArgument("--no-sandbox");
+                options.AddArgument("--disable-dev-shm-usage");
             }
 
             return new ChromeDriver(options);
