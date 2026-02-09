@@ -2,7 +2,7 @@ using OpenQA.Selenium;
 using Serilog;
 using System;
 
-namespace TakealotAutomation.Utilities
+namespace SauceDemoAutomation.Utilities
 {
     /// <summary>
     /// Utility class for common WebDriver operations

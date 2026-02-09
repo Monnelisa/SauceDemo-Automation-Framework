@@ -1,6 +1,6 @@
-# Takealot Automation Framework - Contributing Guide
+# Sauce Demo Automation Framework - Contributing Guide
 
-Thank you for considering contributing to the Takealot Automation Framework! This document provides guidelines and instructions for contributing.
+Thank you for considering contributing to the Sauce Demo Automation Framework! This document provides guidelines and instructions for contributing.
 
 ## Code of Conduct
 
@@ -13,7 +13,7 @@ Thank you for considering contributing to the Takealot Automation Framework! Thi
 
 1. **Fork the repository**
    ```bash
-   git clone https://github.com/yourusername/TakealotAutomation.git
+   git clone https://github.com/yourusername/SauceDemoAutomation.git
    ```
 
 2. **Create a feature branch**
@@ -174,3 +174,4 @@ By contributing, you agree that your contributions will be licensed under the MI
 ---
 
 Thank you for making this project better!
+

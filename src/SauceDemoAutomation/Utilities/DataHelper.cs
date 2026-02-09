@@ -1,6 +1,6 @@
 using System;
 
-namespace TakealotAutomation.Utilities
+namespace SauceDemoAutomation.Utilities
 {
     /// <summary>
     /// Utility class for string operations and data handling

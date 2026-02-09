@@ -1,9 +1,9 @@
 using NUnit.Framework;
 using Moq;
 using Serilog;
-using TakealotAutomation.Pages;
+using SauceDemoAutomation.Pages;
 
-namespace TakealotAutomation.Tests
+namespace SauceDemoAutomation.Tests
 {
     /// <summary>
     /// Test suite for Sauce Demo inventory (homepage) functionality

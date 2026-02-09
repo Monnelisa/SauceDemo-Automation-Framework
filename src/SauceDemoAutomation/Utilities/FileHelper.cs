@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-namespace TakealotAutomation.Utilities
+namespace SauceDemoAutomation.Utilities
 {
     /// <summary>
     /// Utility class for file operations

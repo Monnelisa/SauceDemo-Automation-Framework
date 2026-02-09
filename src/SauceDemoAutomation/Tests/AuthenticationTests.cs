@@ -1,9 +1,9 @@
 using System;
 using NUnit.Framework;
 using Serilog;
-using TakealotAutomation.Pages;
+using SauceDemoAutomation.Pages;
 
-namespace TakealotAutomation.Tests
+namespace SauceDemoAutomation.Tests
 {
     /// <summary>
     /// Test suite for Sauce Demo authentication functionality

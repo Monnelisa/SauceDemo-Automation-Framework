@@ -5,8 +5,8 @@
     <IsPackable>false</IsPackable>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
-    <RootNamespace>TakealotAutomation</RootNamespace>
-    <AssemblyName>TakealotAutomation</AssemblyName>
+    <RootNamespace>SauceDemoAutomation</RootNamespace>
+    <AssemblyName>SauceDemoAutomation</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +26,12 @@
 
   <ItemGroup>
     <None Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="appsettings.Development.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="appsettings.CI.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

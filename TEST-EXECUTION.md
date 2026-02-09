@@ -1,4 +1,4 @@
-# Takealot Automation Framework - Test Execution Guide
+# Sauce Demo Automation Framework - Test Execution Guide
 
 ## Running Tests Locally
 
@@ -188,7 +188,7 @@ cd Screenshots
 ### Tests Timeout
 - Increase `ExplicitWait` in `appsettings.json`
 - Check internet connectivity
-- Verify Takealot.com is accessible
+- Verify Sauce Demo.com is accessible
 
 ### Tests Fail to Start Driver
 ```bash
@@ -320,3 +320,4 @@ chmod +x run-tests.sh
 ---
 
 For more information, see [README.md](README.md)
+

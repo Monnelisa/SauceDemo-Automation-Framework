@@ -3,10 +3,10 @@ using OpenQA.Selenium;
 using Serilog;
 using System;
 using System.IO;
-using TakealotAutomation.Configuration;
-using TakealotAutomation.Core;
+using SauceDemoAutomation.Configuration;
+using SauceDemoAutomation.Core;
 
-namespace TakealotAutomation.Tests
+namespace SauceDemoAutomation.Tests
 {
     /// <summary>
     /// Base test class with setup and teardown logic
@@ -20,11 +20,17 @@ namespace TakealotAutomation.Tests
         [OneTimeSetUp]
         public void OneTimeSetUp()
         {
+            var logPath = ResolveOutputPath(ConfigurationManager.GetLogPath());
+            if (!Directory.Exists(logPath))
+            {
+                Directory.CreateDirectory(logPath);
+            }
+
             // Configure Serilog
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Information()
                 .WriteTo.Console()
-                .WriteTo.File($"{ConfigurationManager.GetLogPath()}/log-.txt", rollingInterval: RollingInterval.Day)
+                .WriteTo.File($"{logPath}/log-.txt", rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 
             Log.Information("Test Suite Started");
@@ -43,8 +49,10 @@ namespace TakealotAutomation.Tests
         {
             if (TestContext.CurrentContext.Result.Outcome.Status == NUnit.Framework.Interfaces.TestStatus.Failed)
             {
-                TakeScreenshot(TestContext.CurrentContext.Test.Name);
-                Log.Error($"Test Failed: {TestContext.CurrentContext.Test.Name}");
+                var testName = TestContext.CurrentContext.Test.Name;
+                TakeScreenshot(testName);
+                SavePageSource(testName);
+                Log.Error($"Test Failed: {testName} - {TestContext.CurrentContext.Result.Message}");
             }
             else
             {
@@ -75,7 +83,7 @@ namespace TakealotAutomation.Tests
                     return;
                 }
 
-                var screenshotDirectory = ConfigurationManager.GetScreenshotPath();
+                var screenshotDirectory = ResolveOutputPath(ConfigurationManager.GetScreenshotPath());
                 if (!Directory.Exists(screenshotDirectory))
                 {
                     Directory.CreateDirectory(screenshotDirectory);
@@ -90,6 +98,42 @@ namespace TakealotAutomation.Tests
             {
                 Log.Error($"Error taking screenshot: {ex.Message}");
             }
+        }
+
+        protected void SavePageSource(string testName)
+        {
+            try
+            {
+                if (Driver == null)
+                {
+                    Log.Warning("Page source skipped because WebDriver is not initialized");
+                    return;
+                }
+
+                var outputDirectory = ResolveOutputPath(ConfigurationManager.GetScreenshotPath());
+                if (!Directory.Exists(outputDirectory))
+                {
+                    Directory.CreateDirectory(outputDirectory);
+                }
+
+                var sourcePath = Path.Combine(outputDirectory, $"{testName}_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.html");
+                File.WriteAllText(sourcePath, Driver.PageSource);
+                Log.Information($"Page source saved: {sourcePath}");
+            }
+            catch (Exception ex)
+            {
+                Log.Error($"Error saving page source: {ex.Message}");
+            }
+        }
+
+        private static string ResolveOutputPath(string path)
+        {
+            if (Path.IsPathRooted(path))
+            {
+                return path;
+            }
+
+            return Path.Combine(Directory.GetCurrentDirectory(), path);
         }
     }
 }

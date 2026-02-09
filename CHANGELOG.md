@@ -1,4 +1,4 @@
-# Takealot Automation Framework - Changelog
+# Sauce Demo Automation Framework - Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -53,7 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 #### Configuration
 - appsettings.json - Centralized configuration
 - .gitignore - Git ignore rules
-- TakealotAutomation.csproj - Project file with dependencies
+- SauceDemoAutomation.csproj - Project file with dependencies
 
 ### Features
 
@@ -159,3 +159,4 @@ This project is licensed under the MIT License - see [LICENSE](LICENSE) file for
 ---
 
 **Last Updated:** 2026-02-04
+

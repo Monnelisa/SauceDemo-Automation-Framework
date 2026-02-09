@@ -1,8 +1,8 @@
-# Takealot Automation Framework - Best Practices Guide
+# Sauce Demo Automation Framework - Best Practices Guide
 
 ## Overview
 
-This guide documents the best practices implemented in the Takealot Automation Framework and provides guidance for maintaining and extending the project.
+This guide documents the best practices implemented in the Sauce Demo Automation Framework and provides guidance for maintaining and extending the project.
 
 ## 1. Page Object Model (POM) Pattern
 
@@ -121,7 +121,7 @@ public class ExampleTests : BaseTest
 ```json
 {
   "AppSettings": {
-    "BaseUrl": "https://www.takealot.com",
+    "BaseUrl": "https://www.SauceDemo.com",
     "BrowserType": "Chrome",
     "ImplicitWait": 10,
     "ExplicitWait": 15
@@ -439,3 +439,4 @@ Following these best practices ensures:
 
 **Last Updated:** February 2026  
 **Version:** 1.0.0
+

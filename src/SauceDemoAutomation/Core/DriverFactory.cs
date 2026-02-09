@@ -3,11 +3,11 @@ using OpenQA.Selenium.Chrome;
 using Serilog;
 using System;
 using System.Net;
-using TakealotAutomation.Configuration;
+using SauceDemoAutomation.Configuration;
 using WebDriverManager;
 using WebDriverManager.DriverConfigs.Impl;
 
-namespace TakealotAutomation.Core
+namespace SauceDemoAutomation.Core
 {
     /// <summary>
     /// Driver factory for managing WebDriver instances

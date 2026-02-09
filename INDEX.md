@@ -1,8 +1,8 @@
-# 📚 TAKEALOT AUTOMATION FRAMEWORK - DOCUMENTATION INDEX
+# 📚 SauceDemo AUTOMATION FRAMEWORK - DOCUMENTATION INDEX
 
 ## Welcome! 👋
 
-This is your complete guide to the Takealot Automation Framework. Use this index to navigate all documentation and resources.
+This is your complete guide to the Sauce Demo Automation Framework. Use this index to navigate all documentation and resources.
 
 ---
 
@@ -99,7 +99,7 @@ This is your complete guide to the Takealot Automation Framework. Use this index
 - Utilities/WaitHelper.cs
 
 **Project Files**
-- TakealotAutomation.csproj
+- SauceDemoAutomation.csproj
 - appsettings.json
 - .gitignore
 - LICENSE
@@ -182,8 +182,8 @@ This is your complete guide to the Takealot Automation Framework. Use this index
 ### First Time Setup
 ```bash
 # 1. Clone and navigate
-git clone https://github.com/yourusername/TakealotAutomation.git
-cd TakealotAutomation
+git clone https://github.com/yourusername/SauceDemoAutomation.git
+cd SauceDemoAutomation
 
 # 2. Restore dependencies
 dotnet restore
@@ -480,3 +480,4 @@ Use this documentation index to navigate and understand every aspect of the proj
 **Status:** ✅ Complete & Ready
 
 🚀 **Begin your exploration!**
+

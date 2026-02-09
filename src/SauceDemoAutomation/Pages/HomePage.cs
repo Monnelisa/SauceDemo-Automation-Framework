@@ -3,7 +3,7 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 
-namespace TakealotAutomation.Pages
+namespace SauceDemoAutomation.Pages
 {
     /// <summary>
     /// Page object for Sauce Demo Inventory (Products) page

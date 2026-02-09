@@ -2,9 +2,9 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using Serilog;
 using System;
-using TakealotAutomation.Configuration;     
+using SauceDemoAutomation.Configuration;     
 
-namespace TakealotAutomation.Core
+namespace SauceDemoAutomation.Core
 {
     /// <summary>
     /// Base class for all page objects with common wait and interaction methods

@@ -2,7 +2,7 @@ using OpenQA.Selenium;
 using Serilog;
 using System;
 
-namespace TakealotAutomation.Pages
+namespace SauceDemoAutomation.Pages
 {
     /// <summary>
     /// Page object for Sauce Demo product details page

@@ -2,7 +2,7 @@ using Microsoft.Extensions.Configuration;
 using Serilog;
 using System;
 
-namespace TakealotAutomation.Configuration
+namespace SauceDemoAutomation.Configuration
 {
     /// <summary>
     /// Configuration manager for application settings
@@ -15,9 +15,14 @@ namespace TakealotAutomation.Configuration
         {
             if (_configuration == null)
             {
+                var environment = Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")
+                                  ?? Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")
+                                  ?? "Development";
+
                 var configBuilder = new ConfigurationBuilder()
                     .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    .AddJsonFile($"appsettings.{environment}.json", optional: true, reloadOnChange: true);
 
                 _configuration = configBuilder.Build();
             }
@@ -25,7 +30,7 @@ namespace TakealotAutomation.Configuration
             return _configuration;
         }
 
-        public static string GetBaseUrl() => GetConfiguration()["AppSettings:BaseUrl"] ?? "https://www.takealot.com";
+        public static string GetBaseUrl() => GetConfiguration()["AppSettings:BaseUrl"] ?? "https://www.saucedemo.com";
 
         public static string GetBrowserType() => GetConfiguration()["AppSettings:BrowserType"] ?? "Chrome";
 

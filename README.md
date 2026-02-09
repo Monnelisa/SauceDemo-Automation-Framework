@@ -1,4 +1,4 @@
-# Takealot-Automation-Framework
+# SauceDemo-Automation-Framework
 Selenium + NUnit UI automation framework built around the Sauce Demo (Swag Labs) site. The project uses a page object model, centralized configuration, and categorized tests (Smoke, Functional, Unit).
 
 **Tech Stack**
@@ -9,12 +9,12 @@ Selenium + NUnit UI automation framework built around the Sauce Demo (Swag Labs)
 - Moq (unit tests for page behavior)
 
 **Project Structure**
-- `src/TakealotAutomation/Configuration` config loading and settings
-- `src/TakealotAutomation/Core` base page and shared WebDriver helpers
-- `src/TakealotAutomation/Pages` page objects
-- `src/TakealotAutomation/Tests` test suites
-- `src/TakealotAutomation/Utilities` shared utilities
-- `src/TakealotAutomation/appsettings.json` runtime config
+- `src/SauceDemoAutomation/Configuration` config loading and settings
+- `src/SauceDemoAutomation/Core` base page and shared WebDriver helpers
+- `src/SauceDemoAutomation/Pages` page objects
+- `src/SauceDemoAutomation/Tests` test suites
+- `src/SauceDemoAutomation/Utilities` shared utilities
+- `src/SauceDemoAutomation/appsettings.json` runtime config
 
 **Quick Start**
 1. Install the .NET SDK that matches the solution.
@@ -37,8 +37,25 @@ dotnet test --filter TestCategory=Functional
 dotnet test --filter TestCategory=Unit
 ```
 
+**CI**
+- GitHub Actions runs restore/build/test on `windows-latest`.
+- Test results are saved to `TestResults` and uploaded as artifacts (TRX, logs, screenshots).
+
 **Configuration**
-Edit `src/TakealotAutomation/appsettings.json`:
+Edit `src/SauceDemoAutomation/appsettings.json`:
 - `BaseUrl` defaults to `https://www.saucedemo.com`
 - `BrowserType`, `HeadlessMode`, and wait settings control execution
 - `ScreenshotPath` and `LogPath` define output locations
+
+Environment-specific overrides:
+- `appsettings.Development.json`
+- `appsettings.CI.json`
+
+Set the environment before running:
+```powershell
+$env:DOTNET_ENVIRONMENT="Development"
+dotnet test
+```
+
+**Reports**
+`dotnet test` produces TRX files. In CI these are collected from `TestResults`.

@@ -1,8 +1,8 @@
-# TAKEALOT AUTOMATION FRAMEWORK - PROJECT SUMMARY
+# SauceDemo AUTOMATION FRAMEWORK - PROJECT SUMMARY
 
 ## Overview
 
-A **professional-grade, enterprise-ready C# Selenium automation framework** built for testing the Takealot e-commerce platform. This framework is production-ready and demonstrates industry best practices suitable for any professional evaluation.
+A **professional-grade, enterprise-ready C# Selenium automation framework** built for testing the Sauce Demo e-commerce platform. This framework is production-ready and demonstrates industry best practices suitable for any professional evaluation.
 
 ---
 
@@ -71,7 +71,7 @@ A **professional-grade, enterprise-ready C# Selenium automation framework** buil
 ## 📁 Complete Project Structure
 
 ```
-TakealotAutomation/
+SauceDemoAutomation/
 │
 ├── Configuration/
 │   └── ConfigurationManager.cs         # Settings management
@@ -108,7 +108,7 @@ TakealotAutomation/
 │   └── test-automation.yml             # CI/CD pipeline
 │
 ├── appsettings.json                    # Configuration
-├── TakealotAutomation.csproj           # Project file
+├── SauceDemoAutomation.csproj           # Project file
 ├── .gitignore                          # Git ignore rules
 │
 ├── Documentation/
@@ -277,7 +277,7 @@ dotnet test --configuration Release
 - .github/workflows/test-automation.yml
 
 ### Project Configuration
-- TakealotAutomation.csproj
+- SauceDemoAutomation.csproj
 
 ---
 
@@ -388,3 +388,4 @@ The project showcases the ability to build scalable, maintainable test automatio
 **Framework Status:** ✅ **COMPLETE & READY FOR PRODUCTION**
 
 **Recruiter Readiness:** ✅ **PROFESSIONAL GRADE**
+

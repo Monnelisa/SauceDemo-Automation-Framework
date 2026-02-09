@@ -2,7 +2,7 @@
 
 ## Framework Capabilities Demonstration
 
-This document showcases the professional quality and capabilities of the Takealot Automation Framework.
+This document showcases the professional quality and capabilities of the Sauce Demo Automation Framework.
 
 ---
 
@@ -10,10 +10,10 @@ This document showcases the professional quality and capabilities of the Takealo
 
 ### Console Output
 ```
-Takealot Automation Framework
+Sauce Demo Automation Framework
 Test Run Started
 
-Loading tests from: TakealotAutomation.Tests
+Loading tests from: SauceDemoAutomation.Tests
 
 ┌─ HomePageTests
 │  ✓ VerifyHomePageLoads (0.523s)
@@ -105,11 +105,11 @@ Success Rate:        100%
 ```xml
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <test-run id="2" testcasecount="23" resultcount="23" total="23" passed="23" failed="0" inconclusive="0" skipped="0" asserts="46" engine-version="3.13.2.0" clr-version="8.0.0" start-time="2026-02-04T10:15:32Z" end-time="2026-02-04T10:16:20Z" duration="47.8">
-  <test-suite type="Assembly" id="0" name="TakealotAutomation.Tests.dll" fullname="TakealotAutomation.Tests.dll" runstate="Runnable" testcasecount="23" resultcount="23" total="23" passed="23" failed="0" warnings="0" time="47.8" start-time="2026-02-04T10:15:32Z" end-time="2026-02-04T10:16:20Z">
-    <test-suite type="Namespace" id="1" name="TakealotAutomation" fullname="TakealotAutomation" runstate="Runnable" testcasecount="23" resultcount="23" total="23" passed="23" failed="0" warnings="0" time="47.8">
-      <test-suite type="TestFixture" id="2" name="HomePageTests" fullname="TakealotAutomation.Tests.HomePageTests" classname="TakealotAutomation.Tests.HomePageTests" runstate="Runnable" testcasecount="4" resultcount="4" total="4" passed="4" failed="0" warnings="0" time="5.2">
-        <test-case id="3" name="VerifyHomePageLoads" fullname="TakealotAutomation.Tests.HomePageTests.VerifyHomePageLoads" methodname="VerifyHomePageLoads" classname="TakealotAutomation.Tests.HomePageTests" runstate="Runnable" seed="1234" result="Passed" start-time="2026-02-04T10:15:33Z" end-time="2026-02-04T10:15:33Z" duration="0.523" asserts="1" />
-        <test-case id="4" name="VerifyPageTitle" fullname="TakealotAutomation.Tests.HomePageTests.VerifyPageTitle" methodname="VerifyPageTitle" classname="TakealotAutomation.Tests.HomePageTests" runstate="Runnable" result="Passed" start-time="2026-02-04T10:15:33Z" end-time="2026-02-04T10:15:34Z" duration="0.412" asserts="1" />
+  <test-suite type="Assembly" id="0" name="SauceDemoAutomation.Tests.dll" fullname="SauceDemoAutomation.Tests.dll" runstate="Runnable" testcasecount="23" resultcount="23" total="23" passed="23" failed="0" warnings="0" time="47.8" start-time="2026-02-04T10:15:32Z" end-time="2026-02-04T10:16:20Z">
+    <test-suite type="Namespace" id="1" name="SauceDemoAutomation" fullname="SauceDemoAutomation" runstate="Runnable" testcasecount="23" resultcount="23" total="23" passed="23" failed="0" warnings="0" time="47.8">
+      <test-suite type="TestFixture" id="2" name="HomePageTests" fullname="SauceDemoAutomation.Tests.HomePageTests" classname="SauceDemoAutomation.Tests.HomePageTests" runstate="Runnable" testcasecount="4" resultcount="4" total="4" passed="4" failed="0" warnings="0" time="5.2">
+        <test-case id="3" name="VerifyHomePageLoads" fullname="SauceDemoAutomation.Tests.HomePageTests.VerifyHomePageLoads" methodname="VerifyHomePageLoads" classname="SauceDemoAutomation.Tests.HomePageTests" runstate="Runnable" seed="1234" result="Passed" start-time="2026-02-04T10:15:33Z" end-time="2026-02-04T10:15:33Z" duration="0.523" asserts="1" />
+        <test-case id="4" name="VerifyPageTitle" fullname="SauceDemoAutomation.Tests.HomePageTests.VerifyPageTitle" methodname="VerifyPageTitle" classname="SauceDemoAutomation.Tests.HomePageTests" runstate="Runnable" result="Passed" start-time="2026-02-04T10:15:33Z" end-time="2026-02-04T10:15:34Z" duration="0.412" asserts="1" />
       </test-suite>
     </test-suite>
   </test-suite>
@@ -237,7 +237,7 @@ Project Root/
 ├── bin/
 │   └── Release/
 │       └── net8.0/
-│           └── TakealotAutomation.dll
+│           └── SauceDemoAutomation.dll
 │
 ├── TestResults/
 │   ├── test-results.trx
@@ -348,7 +348,7 @@ This framework demonstrates:
 
 ## Conclusion
 
-This Takealot Automation Framework is a **professional-grade, production-ready** test automation solution that showcases:
+This Sauce Demo Automation Framework is a **professional-grade, production-ready** test automation solution that showcases:
 
 ✅ Deep understanding of QA automation principles
 ✅ Strong C# and .NET development skills
@@ -363,3 +363,4 @@ This Takealot Automation Framework is a **professional-grade, production-ready**
 **Framework Version:** 1.0.0  
 **Status:** Production Ready  
 **Quality Score:** ⭐⭐⭐⭐⭐ (5/5)
+

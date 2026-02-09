@@ -1,8 +1,8 @@
-# TAKEALOT AUTOMATION FRAMEWORK - COMPLETE OVERVIEW
+# SauceDemo AUTOMATION FRAMEWORK - COMPLETE OVERVIEW
 
 ## 📌 Executive Summary
 
-A **comprehensive, professional-grade C# Selenium test automation framework** for Takealot.com, demonstrating enterprise-level QA practices and designed to impress any technical recruiter.
+A **comprehensive, professional-grade C# Selenium test automation framework** for Sauce Demo.com, demonstrating enterprise-level QA practices and designed to impress any technical recruiter.
 
 **Status:** ✅ PRODUCTION READY  
 **Quality:** ⭐⭐⭐⭐⭐ Professional Grade  
@@ -37,7 +37,7 @@ A **comprehensive, professional-grade C# Selenium test automation framework** fo
 - WaitHelper - Advanced wait strategies
 
 **Configuration & Build**
-- TakealotAutomation.csproj - Project manifest
+- SauceDemoAutomation.csproj - Project manifest
 - appsettings.json - Runtime configuration
 - .gitignore - Git exclusions
 
@@ -169,7 +169,7 @@ A **comprehensive, professional-grade C# Selenium test automation framework** fo
 ### Installation
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/TakealotAutomation.git
+git clone https://github.com/yourusername/SauceDemoAutomation.git
 
 # Restore dependencies
 dotnet restore
@@ -536,7 +536,7 @@ Browser Startup Time:        ~2 seconds
 
 ## 🏁 Conclusion
 
-This **Takealot Automation Framework** is a **professional, enterprise-grade test automation solution** that demonstrates:
+This **Sauce Demo Automation Framework** is a **professional, enterprise-grade test automation solution** that demonstrates:
 
 ✅ Deep expertise in QA automation
 ✅ Professional software development practices
@@ -555,7 +555,7 @@ This **Takealot Automation Framework** is a **professional, enterprise-grade tes
 
 ## 📧 Quick Reference
 
-**Repository:** Takealot-Automation-Framework  
+**Repository:** Sauce Demo-Automation-Framework  
 **Language:** C#  
 **Framework:** .NET 8.0  
 **Test Runner:** NUnit 4.1.0  
@@ -574,3 +574,4 @@ This **Takealot Automation Framework** is a **professional, enterprise-grade tes
 **By:** QA Automation Team
 
 🚀 **Ready to impress recruiters!**
+
