@@ -125,7 +125,9 @@ namespace SauceDemoAutomation.Pages
         {
             Log.Information("Navigating to cart");
             WaitAndClick(_cartLinkLocator);
-            return new CartPage(Driver);
+            var cartPage = new CartPage(Driver);
+            cartPage.IsCartPageLoaded();
+            return cartPage;
         }
 
         /// <summary>
@@ -199,8 +201,12 @@ namespace SauceDemoAutomation.Pages
         {
             Log.Information("Logging out");
             WaitAndClick(_menuButtonLocator);
-            WaitAndClick(_logoutLinkLocator);
-            return new LoginPage(Driver);
+            WaitForElementToBeVisible(_logoutLinkLocator);
+            WaitAndClickWithScroll(_logoutLinkLocator);
+
+            var loginPage = new LoginPage(Driver);
+            loginPage.IsLoginPageLoaded();
+            return loginPage;
         }
 
         /// <summary>

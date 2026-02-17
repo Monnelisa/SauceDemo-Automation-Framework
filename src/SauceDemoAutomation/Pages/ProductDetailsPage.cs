@@ -1,4 +1,5 @@
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using Serilog;
 using System;
 
@@ -13,8 +14,9 @@ namespace SauceDemoAutomation.Pages
         private readonly By _productTitleLocator = By.ClassName("inventory_details_name");
         private readonly By _productPriceLocator = By.ClassName("inventory_details_price");
         private readonly By _productDescriptionLocator = By.ClassName("inventory_details_desc");
-        private readonly By _addToCartButtonLocator = By.XPath("//button[contains(@class, 'btn_primary')]");
-        private readonly By _removeButtonLocator = By.XPath("//button[contains(@class, 'btn_secondary')]");
+        private readonly By _addToCartButtonLocator = By.CssSelector("button[data-test^='add-to-cart']");
+        private readonly By _removeButtonLocator = By.CssSelector("button[data-test^='remove']");
+        private readonly By _cartBadgeLocator = By.ClassName("shopping_cart_badge");
         private readonly By _backButtonLocator = By.Id("back-to-products");
         private readonly By _productContainerLocator = By.ClassName("inventory_details");
 
@@ -56,7 +58,29 @@ namespace SauceDemoAutomation.Pages
         public void AddToCart()
         {
             Log.Information("Adding product to cart");
-            WaitAndClick(_addToCartButtonLocator);
+            WaitForElementToBeVisible(_addToCartButtonLocator);
+            WaitAndClickWithScroll(_addToCartButtonLocator);
+
+            // Wait for UI state change to confirm the item was actually added before navigating away.
+            var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+            bool added = wait.Until(driver =>
+            {
+                var removeButtons = driver.FindElements(_removeButtonLocator);
+                if (removeButtons.Count > 0 && removeButtons[0].Displayed)
+                {
+                    return true;
+                }
+
+                var cartBadges = driver.FindElements(_cartBadgeLocator);
+                if (cartBadges.Count > 0 && int.TryParse(cartBadges[0].Text, out int count) && count > 0)
+                {
+                    return true;
+                }
+
+                return false;
+            });
+
+            Log.Information($"Product add confirmed: {added}");
         }
 
         /// <summary>

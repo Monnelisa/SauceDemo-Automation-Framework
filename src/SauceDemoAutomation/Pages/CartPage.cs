@@ -1,5 +1,7 @@
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using Serilog;
+using System;
 using System.Collections.Generic;
 
 namespace SauceDemoAutomation.Pages
@@ -72,7 +74,8 @@ namespace SauceDemoAutomation.Pages
         public HomePage ContinueShopping()
         {
             Log.Information("Continuing shopping");
-            WaitAndClick(_continueShoppingButtonLocator);
+            WaitForElementToBeVisible(_continueShoppingButtonLocator);
+            WaitAndClickWithScroll(_continueShoppingButtonLocator);
             return new HomePage(Driver);
         }
 
@@ -81,9 +84,30 @@ namespace SauceDemoAutomation.Pages
         /// </summary>
         public bool IsCartPageLoaded()
         {
-            bool isLoaded = IsElementPresent(_checkoutButtonLocator) || IsElementPresent(_continueShoppingButtonLocator);
-            Log.Information($"Cart page loaded: {isLoaded}");
-            return isLoaded;
+            try
+            {
+                var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
+                bool isLoaded = wait.Until(driver =>
+                {
+                    bool onCartUrl = driver.Url.Contains("cart", StringComparison.OrdinalIgnoreCase);
+                    var checkoutButtons = driver.FindElements(_checkoutButtonLocator);
+                    var continueButtons = driver.FindElements(_continueShoppingButtonLocator);
+
+                    bool cartActionsVisible =
+                        (checkoutButtons.Count > 0 && checkoutButtons[0].Displayed) ||
+                        (continueButtons.Count > 0 && continueButtons[0].Displayed);
+
+                    return onCartUrl && cartActionsVisible;
+                });
+
+                Log.Information($"Cart page loaded: {isLoaded}");
+                return isLoaded;
+            }
+            catch (WebDriverTimeoutException ex)
+            {
+                Log.Warning($"Cart page loaded: false - {ex.Message}");
+                return false;
+            }
         }
     }
 }

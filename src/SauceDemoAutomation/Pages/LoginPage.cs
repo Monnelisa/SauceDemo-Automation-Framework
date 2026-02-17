@@ -1,5 +1,7 @@
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using Serilog;
+using System;
 
 namespace SauceDemoAutomation.Pages
 {
@@ -52,9 +54,31 @@ namespace SauceDemoAutomation.Pages
         /// </summary>
         public bool IsLoginPageLoaded()
         {
-            bool isLoaded = IsElementPresent(_usernameInputLocator) && IsElementPresent(_passwordInputLocator);
-            Log.Information($"Login page loaded: {isLoaded}");
-            return isLoaded;
+            try
+            {
+                var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
+                bool isLoaded = wait.Until(driver =>
+                {
+                    var usernameInputs = driver.FindElements(_usernameInputLocator);
+                    var passwordInputs = driver.FindElements(_passwordInputLocator);
+                    var loginButtons = driver.FindElements(_loginButtonLocator);
+
+                    return usernameInputs.Count > 0
+                           && usernameInputs[0].Displayed
+                           && passwordInputs.Count > 0
+                           && passwordInputs[0].Displayed
+                           && loginButtons.Count > 0
+                           && loginButtons[0].Displayed;
+                });
+
+                Log.Information($"Login page loaded: {isLoaded}");
+                return isLoaded;
+            }
+            catch (WebDriverTimeoutException ex)
+            {
+                Log.Warning($"Login page loaded: false - {ex.Message}");
+                return false;
+            }
         }
     }
 }
