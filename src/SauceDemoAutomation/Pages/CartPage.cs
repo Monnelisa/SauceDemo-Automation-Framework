@@ -28,6 +28,7 @@ namespace SauceDemoAutomation.Pages
         /// </summary>
         public int GetCartItemCount()
         {
+            WaitForElementToBeVisible(_cartContainerLocator);
             var items = Driver.FindElements(_cartItemsLocator);
             int count = items.Count;
             Log.Information($"Cart item count: {count}");
@@ -39,6 +40,7 @@ namespace SauceDemoAutomation.Pages
         /// </summary>
         public IList<IWebElement> GetCartItems()
         {
+            WaitForElementToBeVisible(_cartContainerLocator);
             var items = Driver.FindElements(_cartItemsLocator);
             Log.Information($"Retrieved {items.Count} cart items");
             return items;
@@ -54,7 +56,15 @@ namespace SauceDemoAutomation.Pages
             if (items.Count > index)
             {
                 var removeButton = items[index].FindElement(_removeButtonLocator);
-                removeButton.Click();
+                try
+                {
+                    removeButton.Click();
+                }
+                catch (Exception ex) when (ex is ElementClickInterceptedException || ex is WebDriverException || ex is StaleElementReferenceException)
+                {
+                    IJavaScriptExecutor jsExecutor = (IJavaScriptExecutor)Driver;
+                    jsExecutor.ExecuteScript("arguments[0].click();", removeButton);
+                }
             }
         }
 

@@ -1,5 +1,7 @@
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using Serilog;
+using System;
 using System.Collections.Generic;
 
 namespace SauceDemoAutomation.Pages
@@ -65,9 +67,23 @@ namespace SauceDemoAutomation.Pages
         /// </summary>
         public bool AreSearchResultsDisplayed()
         {
-            bool resultsVisible = IsElementPresent(_productItemsLocator);
-            Log.Information($"Search results displayed: {resultsVisible}");
-            return resultsVisible;
+            try
+            {
+                var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(10));
+                bool resultsVisible = wait.Until(driver =>
+                {
+                    var items = driver.FindElements(_productItemsLocator);
+                    return items.Count > 0 && items[0].Displayed;
+                });
+
+                Log.Information($"Search results displayed: {resultsVisible}");
+                return resultsVisible;
+            }
+            catch (WebDriverTimeoutException ex)
+            {
+                Log.Warning($"Search results displayed: false - {ex.Message}");
+                return false;
+            }
         }
 
         /// <summary>
@@ -80,11 +96,28 @@ namespace SauceDemoAutomation.Pages
         /// </summary>
         public bool IsSearchResultsPageLoaded()
         {
-            bool headerPresent = IsElementPresent(_searchResultsHeaderLocator);
-            bool resultsPresent = AreSearchResultsDisplayed();
-            bool loaded = headerPresent || resultsPresent;
-            Log.Information($"Search results page loaded: {loaded}");
-            return loaded;
+            try
+            {
+                var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
+                bool loaded = wait.Until(driver =>
+                {
+                    var headers = driver.FindElements(_searchResultsHeaderLocator);
+                    bool headerPresent = headers.Count > 0 && headers[0].Displayed;
+
+                    var items = driver.FindElements(_productItemsLocator);
+                    bool resultsPresent = items.Count > 0 && items[0].Displayed;
+
+                    return headerPresent || resultsPresent;
+                });
+
+                Log.Information($"Search results page loaded: {loaded}");
+                return loaded;
+            }
+            catch (WebDriverTimeoutException ex)
+            {
+                Log.Warning($"Search results page loaded: false - {ex.Message}");
+                return false;
+            }
         }
 
         /// <summary>

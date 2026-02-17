@@ -1,5 +1,7 @@
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using Serilog;
+using System;
 
 namespace SauceDemoAutomation.Pages
 {
@@ -77,11 +79,28 @@ namespace SauceDemoAutomation.Pages
         /// </summary>
         public bool IsCheckoutPageLoaded()
         {
-            bool isLoaded = IsElementPresent(_firstNameInputLocator) && 
-                           IsElementPresent(_lastNameInputLocator) && 
-                           IsElementPresent(_postalCodeInputLocator);
-            Log.Information($"Checkout page loaded: {isLoaded}");
-            return isLoaded;
+            try
+            {
+                var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
+                bool isLoaded = wait.Until(driver =>
+                {
+                    var firstName = driver.FindElements(_firstNameInputLocator);
+                    var lastName = driver.FindElements(_lastNameInputLocator);
+                    var postalCode = driver.FindElements(_postalCodeInputLocator);
+
+                    return firstName.Count > 0 && firstName[0].Displayed
+                        && lastName.Count > 0 && lastName[0].Displayed
+                        && postalCode.Count > 0 && postalCode[0].Displayed;
+                });
+
+                Log.Information($"Checkout page loaded: {isLoaded}");
+                return isLoaded;
+            }
+            catch (WebDriverTimeoutException ex)
+            {
+                Log.Warning($"Checkout page loaded: false - {ex.Message}");
+                return false;
+            }
         }
     }
 }

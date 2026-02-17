@@ -1,5 +1,7 @@
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using Serilog;
+using System;
 
 namespace SauceDemoAutomation.Pages
 {
@@ -89,9 +91,26 @@ namespace SauceDemoAutomation.Pages
         /// </summary>
         public bool IsSignUpPageLoaded()
         {
-            bool isLoaded = IsElementPresent(_emailInputLocator) && IsElementPresent(_signUpButtonLocator);
-            Log.Information($"Signup page loaded: {isLoaded}");
-            return isLoaded;
+            try
+            {
+                var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
+                bool isLoaded = wait.Until(driver =>
+                {
+                    var emailInputs = driver.FindElements(_emailInputLocator);
+                    var signUpButtons = driver.FindElements(_signUpButtonLocator);
+
+                    return emailInputs.Count > 0 && emailInputs[0].Displayed
+                        && signUpButtons.Count > 0 && signUpButtons[0].Displayed;
+                });
+
+                Log.Information($"Signup page loaded: {isLoaded}");
+                return isLoaded;
+            }
+            catch (WebDriverTimeoutException ex)
+            {
+                Log.Warning($"Signup page loaded: false - {ex.Message}");
+                return false;
+            }
         }
     }
 }

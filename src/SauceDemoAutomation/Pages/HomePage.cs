@@ -62,11 +62,26 @@ namespace SauceDemoAutomation.Pages
         public ProductDetailsPage ClickProductByIndex(int index)
         {
             Log.Information($"Clicking product at index: {index}");
-            var products = GetProductItems();
-            if (products.Count > index)
+            WaitForElementToBeVisible(_productItemsLocator);
+            var productNames = Driver.FindElements(_productNameLocator);
+
+            if (productNames.Count <= index)
             {
-                products[index].FindElement(_productNameLocator).Click();
+                Log.Warning($"Product index {index} was not available. Product count: {productNames.Count}");
+                return new ProductDetailsPage(Driver);
             }
+
+            var targetProduct = productNames[index];
+            try
+            {
+                targetProduct.Click();
+            }
+            catch (Exception ex) when (ex is ElementClickInterceptedException || ex is WebDriverException || ex is StaleElementReferenceException)
+            {
+                IJavaScriptExecutor jsExecutor = (IJavaScriptExecutor)Driver;
+                jsExecutor.ExecuteScript("arguments[0].click();", targetProduct);
+            }
+
             return new ProductDetailsPage(Driver);
         }
 
@@ -189,9 +204,9 @@ namespace SauceDemoAutomation.Pages
         public void SortBy(string sortOption)
         {
             Log.Information($"Sorting by: {sortOption}");
+            WaitForElementToBeVisible(_sortDropdownLocator);
             WaitAndClick(_sortDropdownLocator);
-            var option = Driver.FindElement(By.XPath($"//option[contains(text(), '{sortOption}')]"));
-            option.Click();
+            WaitAndClick(By.XPath($"//option[contains(text(), '{sortOption}')]"));
         }
 
         /// <summary>

@@ -1,5 +1,7 @@
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using Serilog;
+using System;
 
 namespace SauceDemoAutomation.Pages
 {
@@ -40,9 +42,23 @@ namespace SauceDemoAutomation.Pages
         /// </summary>
         public bool IsOrderConfirmationDisplayed()
         {
-            bool isDisplayed = IsElementPresent(_confirmationMessageLocator);
-            Log.Information($"Order confirmation displayed: {isDisplayed}");
-            return isDisplayed;
+            try
+            {
+                var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
+                bool isDisplayed = wait.Until(driver =>
+                {
+                    var confirmations = driver.FindElements(_confirmationMessageLocator);
+                    return confirmations.Count > 0 && confirmations[0].Displayed;
+                });
+
+                Log.Information($"Order confirmation displayed: {isDisplayed}");
+                return isDisplayed;
+            }
+            catch (WebDriverTimeoutException ex)
+            {
+                Log.Warning($"Order confirmation displayed: false - {ex.Message}");
+                return false;
+            }
         }
 
         /// <summary>
