@@ -150,7 +150,7 @@ namespace SauceDemoAutomation.Core
             {
                 try
                 {
-                    var element = Driver.FindElement(locator);
+                    var element = WaitForElementToBeVisible(locator);
                     IJavaScriptExecutor jsExecutor = (IJavaScriptExecutor)Driver;
                     jsExecutor.ExecuteScript("arguments[0].click();", element);
                     Log.Information($"Clicked element with JS fallback: {locator}");

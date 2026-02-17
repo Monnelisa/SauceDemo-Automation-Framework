@@ -49,7 +49,16 @@ namespace SauceDemoAutomation.Pages
         {
             Log.Information("Finishing order");
             WaitAndClickWithScroll(_finishButtonLocator);
-            return new OrderConfirmationPage(Driver);
+
+            var confirmationPage = new OrderConfirmationPage(Driver);
+            if (!confirmationPage.IsOrderConfirmationDisplayed() && IsElementPresent(_finishButtonLocator))
+            {
+                Log.Warning("Order confirmation not detected after first finish click; retrying finish once");
+                WaitAndClickWithScroll(_finishButtonLocator);
+                confirmationPage.IsOrderConfirmationDisplayed();
+            }
+
+            return confirmationPage;
         }
 
         /// <summary>

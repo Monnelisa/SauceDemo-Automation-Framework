@@ -2,10 +2,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using Serilog;
 using System;
-using System.Net;
 using SauceDemoAutomation.Configuration;
-using WebDriverManager;
-using WebDriverManager.DriverConfigs.Impl;
 
 namespace SauceDemoAutomation.Core
 {
@@ -32,21 +29,6 @@ namespace SauceDemoAutomation.Core
 
         private static IWebDriver InitializeChromeDriver()
         {
-            try
-            {
-                // Try to setup driver using WebDriverManager (for environments with internet)
-                new DriverManager().SetUpDriver(new ChromeConfig());
-                Log.Information("ChromeDriver configured via WebDriverManager");
-            }
-            catch (WebException)
-            {
-                Log.Information("Network unavailable, using bundled ChromeDriver from NuGet package");
-            }
-            catch (Exception ex)
-            {
-                Log.Information($"WebDriverManager unavailable ({ex.GetType().Name}), using bundled ChromeDriver");
-            }
-
             var options = new ChromeOptions();
             options.AddArgument("--start-maximized");
             options.AddArgument("--disable-notifications");
@@ -68,6 +50,8 @@ namespace SauceDemoAutomation.Core
                 options.AddArgument("--disable-dev-shm-usage");
             }
 
+            // Let Selenium Manager resolve the matching driver for installed Chrome.
+            Log.Information("Initializing ChromeDriver via Selenium Manager");
             return new ChromeDriver(options);
         }
 

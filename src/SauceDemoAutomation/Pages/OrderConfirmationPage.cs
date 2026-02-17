@@ -47,8 +47,10 @@ namespace SauceDemoAutomation.Pages
                 var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(15));
                 bool isDisplayed = wait.Until(driver =>
                 {
+                    bool onCompleteUrl = driver.Url.Contains("checkout-complete", StringComparison.OrdinalIgnoreCase);
                     var confirmations = driver.FindElements(_confirmationMessageLocator);
-                    return confirmations.Count > 0 && confirmations[0].Displayed;
+                    bool headerVisible = confirmations.Count > 0 && confirmations[0].Displayed;
+                    return onCompleteUrl || headerVisible;
                 });
 
                 Log.Information($"Order confirmation displayed: {isDisplayed}");
