@@ -44,6 +44,9 @@ namespace SauceDemoAutomation.Configuration
         public static int GetExplicitWait()
             => int.Parse(GetEnv("APPSETTINGS__EXPLICITWAIT") ?? GetConfiguration()["AppSettings:ExplicitWait"] ?? "15");
 
+        public static int GetRetryAttempts()
+            => int.Parse(GetEnv("APPSETTINGS__RETRYATTEMPTS") ?? GetConfiguration()["AppSettings:RetryAttempts"] ?? "2");
+
         public static int GetPageLoadTimeout()
             => int.Parse(GetEnv("APPSETTINGS__PAGELOADTIMEOUT") ?? GetConfiguration()["AppSettings:PageLoadTimeout"] ?? "30");
 

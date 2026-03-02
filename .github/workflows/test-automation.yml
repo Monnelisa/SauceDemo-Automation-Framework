@@ -11,6 +11,7 @@ jobs:
     runs-on: windows-latest
     env:
       DOTNET_ENVIRONMENT: CI
+      CI: true
 
     steps:
     - name: Checkout code

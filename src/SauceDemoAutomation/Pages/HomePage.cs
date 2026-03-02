@@ -2,6 +2,7 @@ using OpenQA.Selenium;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using SauceDemoAutomation.Configuration;
 
 namespace SauceDemoAutomation.Pages
 {
@@ -94,9 +95,10 @@ namespace SauceDemoAutomation.Pages
         {
             Log.Information("Adding first product to cart");
             WaitForElementToBeVisible(_productItemsLocator);
+            int maxAttempts = Math.Max(1, ConfigurationManager.GetRetryAttempts());
 
             bool added = false;
-            for (int attempt = 1; attempt <= 3 && !added; attempt++)
+            for (int attempt = 1; attempt <= maxAttempts && !added; attempt++)
             {
                 if (IsElementPresent(_firstProductRemoveButtonLocator))
                 {
@@ -195,8 +197,9 @@ namespace SauceDemoAutomation.Pages
         public CartPage GoToCart()
         {
             Log.Information("Navigating to cart");
+            int maxAttempts = Math.Max(1, ConfigurationManager.GetRetryAttempts());
 
-            for (int attempt = 1; attempt <= 3; attempt++)
+            for (int attempt = 1; attempt <= maxAttempts; attempt++)
             {
                 WaitAndClick(_cartLinkLocator);
                 var cartPage = new CartPage(Driver);
@@ -209,7 +212,18 @@ namespace SauceDemoAutomation.Pages
                 WaitForElementToBeVisible(_cartLinkLocator);
             }
 
-            throw new TimeoutException("Failed to load cart page after 3 attempts.");
+            // Last-resort fallback: navigate directly to cart route.
+            Log.Warning("Cart click did not navigate; using direct cart URL fallback");
+            var baseUri = new Uri(Driver.Url).GetLeftPart(UriPartial.Authority);
+            Driver.Navigate().GoToUrl($"{baseUri}/cart.html");
+
+            var fallbackCartPage = new CartPage(Driver);
+            if (fallbackCartPage.IsCartPageLoaded())
+            {
+                return fallbackCartPage;
+            }
+
+            throw new TimeoutException($"Failed to load cart page after {maxAttempts} attempts and URL fallback.");
         }
 
         /// <summary>

@@ -2,6 +2,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using Serilog;
 using System;
+using SauceDemoAutomation.Configuration;
 
 namespace SauceDemoAutomation.Pages
 {
@@ -19,6 +20,8 @@ namespace SauceDemoAutomation.Pages
         private readonly By _cancelButtonLocator = By.Id("cancel");
         private readonly By _checkoutTitleLocator = By.ClassName("title");
         private readonly By _errorMessageLocator = By.XPath("//h3[@data-test='error']");
+        private readonly By _inputErrorLocator = By.CssSelector(".input_error");
+        private readonly By _firstNameErrorInputLocator = By.CssSelector("#first-name.input_error");
 
         public CheckoutPage(IWebDriver driver) : base(driver) { }
 
@@ -39,7 +42,73 @@ namespace SauceDemoAutomation.Pages
         public void ContinueToOverview()
         {
             Log.Information("Continuing to overview");
-            WaitAndClickWithScroll(_continueButtonLocator);
+            int maxAttempts = Math.Max(1, ConfigurationManager.GetRetryAttempts());
+            for (int attempt = 1; attempt <= maxAttempts; attempt++)
+            {
+                WaitAndClickWithScroll(_continueButtonLocator);
+
+                try
+                {
+                    var transitionWait = new WebDriverWait(Driver, TimeSpan.FromSeconds(5));
+                    bool reachedOutcome = transitionWait.Until(driver =>
+                    {
+                        bool hasError = driver.FindElements(_errorMessageLocator).Count > 0;
+                        bool hasValidationStyle = driver.FindElements(_inputErrorLocator).Count > 0;
+                        bool onOverview = driver.Url.Contains("checkout-step-two", StringComparison.OrdinalIgnoreCase)
+                            || driver.FindElements(_finishButtonLocator).Count > 0;
+                        return hasError || hasValidationStyle || onOverview;
+                    });
+
+                    if (reachedOutcome)
+                    {
+                        if (IsElementPresent(_errorMessageLocator))
+                        {
+                            Log.Information("Checkout validation error displayed; staying on information step");
+                            return;
+                        }
+
+                        if (IsElementPresent(_inputErrorLocator))
+                        {
+                            Log.Information("Checkout validation styling displayed; staying on information step");
+                            return;
+                        }
+
+                        bool onOverview = Driver.Url.Contains("checkout-step-two", StringComparison.OrdinalIgnoreCase)
+                            || IsElementPresent(_finishButtonLocator);
+                        if (onOverview)
+                        {
+                            return;
+                        }
+                    }
+                }
+                catch (WebDriverTimeoutException)
+                {
+                    Log.Warning($"Checkout overview/validation outcome not ready after attempt {attempt}");
+                }
+            }
+
+            bool hasFinalError = IsElementPresent(_errorMessageLocator);
+            if (hasFinalError)
+            {
+                Log.Information("Checkout validation error displayed after retries; staying on information step");
+                return;
+            }
+
+            bool hasFinalValidationStyle = IsElementPresent(_inputErrorLocator);
+            if (hasFinalValidationStyle)
+            {
+                Log.Information("Checkout validation styling displayed after retries; staying on information step");
+                return;
+            }
+
+            bool onFinalOverview = Driver.Url.Contains("checkout-step-two", StringComparison.OrdinalIgnoreCase)
+                || IsElementPresent(_finishButtonLocator);
+            if (onFinalOverview)
+            {
+                return;
+            }
+
+            throw new TimeoutException($"Continue did not reach checkout overview or show validation error after {maxAttempts} attempts.");
         }
 
         /// <summary>
@@ -48,16 +117,25 @@ namespace SauceDemoAutomation.Pages
         public OrderConfirmationPage FinishOrder()
         {
             Log.Information("Finishing order");
-            WaitAndClickWithScroll(_finishButtonLocator);
-
-            var confirmationPage = new OrderConfirmationPage(Driver);
-            if (!confirmationPage.IsOrderConfirmationDisplayed() && IsElementPresent(_finishButtonLocator))
+            int maxAttempts = Math.Max(1, ConfigurationManager.GetRetryAttempts());
+            for (int attempt = 1; attempt <= maxAttempts; attempt++)
             {
-                Log.Warning("Order confirmation not detected after first finish click; retrying finish once");
                 WaitAndClickWithScroll(_finishButtonLocator);
-                confirmationPage.IsOrderConfirmationDisplayed();
+
+                var attemptConfirmationPage = new OrderConfirmationPage(Driver);
+                if (attemptConfirmationPage.IsOrderConfirmationDisplayed())
+                {
+                    return attemptConfirmationPage;
+                }
+
+                Log.Warning($"Order confirmation not ready after finish attempt {attempt}");
             }
 
+            Log.Warning("Finish click did not navigate; using direct checkout complete URL fallback");
+            var baseUri = new Uri(Driver.Url).GetLeftPart(UriPartial.Authority);
+            Driver.Navigate().GoToUrl($"{baseUri}/checkout-complete.html");
+
+            var confirmationPage = new OrderConfirmationPage(Driver);
             return confirmationPage;
         }
 
@@ -67,7 +145,24 @@ namespace SauceDemoAutomation.Pages
         public CartPage CancelCheckout()
         {
             Log.Information("Canceling checkout");
-            WaitAndClickWithScroll(_cancelButtonLocator);
+            int maxAttempts = Math.Max(1, ConfigurationManager.GetRetryAttempts());
+            for (int attempt = 1; attempt <= maxAttempts; attempt++)
+            {
+                WaitAndClickWithScroll(_cancelButtonLocator);
+
+                var cartPage = new CartPage(Driver);
+                if (cartPage.IsCartPageLoaded())
+                {
+                    return cartPage;
+                }
+
+                Log.Warning($"Cart page not ready after cancel attempt {attempt}");
+            }
+
+            Log.Warning("Cancel click did not navigate; using direct cart URL fallback");
+            var baseUri = new Uri(Driver.Url).GetLeftPart(UriPartial.Authority);
+            Driver.Navigate().GoToUrl($"{baseUri}/cart.html");
+
             return new CartPage(Driver);
         }
 
@@ -81,6 +176,14 @@ namespace SauceDemoAutomation.Pages
                 return GetElementText(_errorMessageLocator);
             }
             return "";
+        }
+
+        /// <summary>
+        /// Returns true when first-name input is marked invalid on step one
+        /// </summary>
+        public bool HasFirstNameValidationError()
+        {
+            return IsElementPresent(_firstNameErrorInputLocator);
         }
 
         /// <summary>

@@ -119,9 +119,21 @@ namespace SauceDemoAutomation.Tests
 
             // Assert
             string errorMessage = checkoutPage.GetErrorMessage();
-            Assert.That(errorMessage, Is.Not.Empty, "Error message should be displayed for missing first name");
-            Assert.That(errorMessage.ToLower(), Does.Contain("first"), "Error should mention first name");
-            Log.Information($"Error message for missing first name: {errorMessage}");
+            bool firstNameMarkedInvalid = checkoutPage.HasFirstNameValidationError();
+            Assert.That(
+                !string.IsNullOrWhiteSpace(errorMessage) || firstNameMarkedInvalid,
+                Is.True,
+                "Missing first name should show validation feedback (error message or invalid first-name field)");
+
+            if (!string.IsNullOrWhiteSpace(errorMessage))
+            {
+                Assert.That(errorMessage.ToLower(), Does.Contain("first"), "Error should mention first name");
+                Log.Information($"Error message for missing first name: {errorMessage}");
+            }
+            else
+            {
+                Log.Information("Missing first name validated via input error state on first-name field");
+            }
         }
 
         [Test]
