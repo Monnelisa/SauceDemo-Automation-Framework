@@ -20,7 +20,6 @@ namespace SauceDemoAutomation.Pages
         private readonly By _cancelButtonLocator = By.Id("cancel");
         private readonly By _checkoutTitleLocator = By.ClassName("title");
         private readonly By _errorMessageLocator = By.XPath("//h3[@data-test='error']");
-        private readonly By _inputErrorLocator = By.CssSelector(".input_error");
         private readonly By _firstNameErrorInputLocator = By.CssSelector("#first-name.input_error");
 
         public CheckoutPage(IWebDriver driver) : base(driver) { }
@@ -53,30 +52,38 @@ namespace SauceDemoAutomation.Pages
                     bool reachedOutcome = transitionWait.Until(driver =>
                     {
                         bool hasError = driver.FindElements(_errorMessageLocator).Count > 0;
-                        bool hasValidationStyle = driver.FindElements(_inputErrorLocator).Count > 0;
                         bool onOverview = driver.Url.Contains("checkout-step-two", StringComparison.OrdinalIgnoreCase)
                             || driver.FindElements(_finishButtonLocator).Count > 0;
-                        return hasError || hasValidationStyle || onOverview;
+                        return hasError || onOverview || !driver.Url.Contains("checkout-step-one", StringComparison.OrdinalIgnoreCase);
                     });
 
                     if (reachedOutcome)
                     {
+                        bool onOverview = Driver.Url.Contains("checkout-step-two", StringComparison.OrdinalIgnoreCase)
+                            || IsElementPresent(_finishButtonLocator);
+                        if (onOverview)
+                        {
+                            return;
+                        }
+
+                        bool onStepOne = Driver.Url.Contains("checkout-step-one", StringComparison.OrdinalIgnoreCase)
+                            || IsElementPresent(_continueButtonLocator);
+                        if (!onStepOne)
+                        {
+                            // Transient navigation state; retry once more to settle before failing.
+                            Log.Warning($"Checkout state is transitional after continue attempt {attempt}; retrying");
+                            continue;
+                        }
+
                         if (IsElementPresent(_errorMessageLocator))
                         {
                             Log.Information("Checkout validation error displayed; staying on information step");
                             return;
                         }
 
-                        if (IsElementPresent(_inputErrorLocator))
+                        if (IsElementPresent(_firstNameErrorInputLocator))
                         {
-                            Log.Information("Checkout validation styling displayed; staying on information step");
-                            return;
-                        }
-
-                        bool onOverview = Driver.Url.Contains("checkout-step-two", StringComparison.OrdinalIgnoreCase)
-                            || IsElementPresent(_finishButtonLocator);
-                        if (onOverview)
-                        {
+                            Log.Information("First-name validation styling displayed; staying on information step");
                             return;
                         }
                     }
@@ -94,10 +101,10 @@ namespace SauceDemoAutomation.Pages
                 return;
             }
 
-            bool hasFinalValidationStyle = IsElementPresent(_inputErrorLocator);
+            bool hasFinalValidationStyle = IsElementPresent(_firstNameErrorInputLocator);
             if (hasFinalValidationStyle)
             {
-                Log.Information("Checkout validation styling displayed after retries; staying on information step");
+                Log.Information("First-name validation styling displayed after retries; staying on information step");
                 return;
             }
 
